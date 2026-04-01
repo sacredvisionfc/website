@@ -730,7 +730,10 @@
         border-radius: 16px;
         overflow: hidden;
         border: 1px solid var(--border);
-        transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s,
+          border-color 0.2s;
       }
       .success-card:hover {
         transform: translateY(-4px);
@@ -2104,7 +2107,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        transition: transform 0.3s, box-shadow 0.3s;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
       }
       .vacancy-card:hover {
         transform: translateY(-4px);
@@ -2606,7 +2611,6 @@
         }
       }
 
-
       /* SAFETY SECTION */
       .safety-grid {
         display: grid;
@@ -2742,7 +2746,11 @@
           rel="noopener"
           title="Chat on WhatsApp"
         >
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="#25d366">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+            />
+          </svg>
           +233 24 499 7316
         </a>
         <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -2756,7 +2764,15 @@
         >
           🌙
         </button>
-        <a href="#pricing" class="nav-cta" onclick="event.preventDefault(); document.getElementById('registerModal').classList.add('active');">Register Now</a>
+        <a
+          href="#pricing"
+          class="nav-cta"
+          onclick="
+            event.preventDefault();
+            document.getElementById('registerModal').classList.add('active');
+          "
+          >Register Now</a
+        >
       </div>
     </nav>
     <script>
@@ -2815,7 +2831,15 @@
           months. Open to players aged 15–25.
         </p>
         <div class="hero-btns">
-          <a href="#pricing" class="btn-primary" onclick="event.preventDefault(); document.getElementById('registerModal').classList.add('active');">Register Now</a>
+          <a
+            href="#pricing"
+            class="btn-primary"
+            onclick="
+              event.preventDefault();
+              document.getElementById('registerModal').classList.add('active');
+            "
+            >Register Now</a
+          >
           <a href="#programme" class="btn-secondary">View Programme</a>
         </div>
         <div class="hero-stats">
@@ -2998,9 +3022,10 @@
             <div class="inc-icon">🍽️</div>
             <div class="inc-title">Full Board Meals</div>
             <div class="inc-desc">
-              Three Ghanaian &amp; Continental meals daily. Breakfast: oatmeal, eggs, sausage,
-              tea. Lunch: jollof rice, fried rice, palava sauce. Dinner: banku
-              with tilapia, yam, rice ball with groundnut soup and more.
+              Three Ghanaian &amp; Continental meals daily. Breakfast: oatmeal,
+              eggs, sausage, tea. Lunch: jollof rice, fried rice, palava sauce.
+              Dinner: banku with tilapia, yam, rice ball with groundnut soup and
+              more.
             </div>
           </div>
           <div class="inc-box">
@@ -3211,7 +3236,9 @@
             <div class="sch-item">
               <div class="sch-time">07:30 – 08:30</div>
               <div class="sch-act">
-                Breakfast<small>Full board — Ghanaian &amp; Continental meals daily</small>
+                Breakfast<small
+                  >Full board — Ghanaian &amp; Continental meals daily</small
+                >
               </div>
             </div>
             <div class="sch-item">
@@ -3244,7 +3271,12 @@
             </div>
             <div class="sch-item">
               <div class="sch-time">16:30 – 18:30</div>
-              <div class="sch-act">Free Time / Optional Activities<small>Light football, swimming (optional), personal time / recovery</small></div>
+              <div class="sch-act">
+                Free Time / Optional Activities<small
+                  >Light football, swimming (optional), personal time /
+                  recovery</small
+                >
+              </div>
             </div>
             <div class="sch-item">
               <div class="sch-time">18:30 – 20:00</div>
@@ -3252,7 +3284,9 @@
             </div>
             <div class="sch-item">
               <div class="sch-time">20:00 – 22:00</div>
-              <div class="sch-act">Full Free Time / 🤝 Mentorship (optional)</div>
+              <div class="sch-act">
+                Full Free Time / 🤝 Mentorship (optional)
+              </div>
             </div>
             <div class="sch-item">
               <div class="sch-time">22:00</div>
@@ -3288,7 +3322,8 @@
               <div class="sch-time">09:00 – 12:00</div>
               <div class="sch-act">
                 🇬🇭 Ghana Cultural Activity<small
-                  >Cape Coast Castle, Kakum, Fort Amsterdam, Elmina River, Boabab Beach</small
+                  >Cape Coast Castle, Kakum, Fort Amsterdam, Elmina River,
+                  Boabab Beach</small
                 >
               </div>
             </div>
@@ -3316,7 +3351,6 @@
         </div>
       </div>
     </section>
-
 
     <!-- WHY SACRED VISION -->
     <section class="sec">
@@ -3471,9 +3505,9 @@
               <div class="coach-bio">
                 A dynamic head coach known for sharp tactical insight and
                 passion for player development. Leading training sessions,
-                match-day strategy, and performance reviews to help teams
-                and players unlock their full potential through data-driven
-                coaching and innovative methods.
+                match-day strategy, and performance reviews to help teams and
+                players unlock their full potential through data-driven coaching
+                and innovative methods.
               </div>
               <div class="coach-creds">
                 <span class="coach-cred">Head Coach</span>
@@ -3516,16 +3550,21 @@
         COACHING <span class="y">VACANCIES</span>
       </h2>
       <p class="intro reveal reveal-d2">
-        We're looking for passionate coaches ready to develop the next generation
-        of football talent in Ghana. Whether you're experienced or just starting
-        out — there's a place for you at Sacred Vision.
+        We're looking for passionate coaches ready to develop the next
+        generation of football talent in Ghana. Whether you're experienced or
+        just starting out — there's a place for you at Sacred Vision.
       </p>
 
       <div class="vacancy-grid">
         <!-- Lead Coach -->
         <div class="vacancy-card reveal">
           <div class="vacancy-icon">⚽</div>
-          <div class="vacancy-title">Football Coach <span style="color:var(--muted);font-size:0.75em">(Lead Coach)</span></div>
+          <div class="vacancy-title">
+            Football Coach
+            <span style="color: var(--muted); font-size: 0.75em"
+              >(Lead Coach)</span
+            >
+          </div>
           <div class="vacancy-desc">
             Deliver high-quality training sessions and develop players to reach
             their full potential. Lead team drills, matches, and performance
@@ -3533,12 +3572,16 @@
           </div>
           <ul class="vacancy-list">
             <li>Plan and conduct structured training sessions</li>
-            <li>Develop players' technical, tactical &amp; physical abilities</li>
+            <li>
+              Develop players' technical, tactical &amp; physical abilities
+            </li>
             <li>Lead drills, matches &amp; performance evaluations</li>
             <li>Mentor young athletes on discipline &amp; teamwork</li>
             <li>Monitor player progress and provide feedback</li>
           </ul>
-          <a href="#" class="btn-primary vacancy-btn" data-vacancy="lead-coach">Apply Now</a>
+          <a href="#" class="btn-primary vacancy-btn" data-vacancy="lead-coach"
+            >Apply Now</a
+          >
         </div>
 
         <!-- Assistant Coach -->
@@ -3556,7 +3599,12 @@
             <li>Ensure training equipment is prepared &amp; maintained</li>
             <li>Provide guidance and encouragement to players</li>
           </ul>
-          <a href="#" class="btn-primary vacancy-btn" data-vacancy="assistant-coach">Apply Now</a>
+          <a
+            href="#"
+            class="btn-primary vacancy-btn"
+            data-vacancy="assistant-coach"
+            >Apply Now</a
+          >
         </div>
 
         <!-- Volunteer Coach -->
@@ -3574,7 +3622,12 @@
             <li>Participate in coaching development programmes</li>
             <li>Gain hands-on experience in football mentorship</li>
           </ul>
-          <a href="#" class="btn-primary vacancy-btn" data-vacancy="volunteer-coach">Apply Now</a>
+          <a
+            href="#"
+            class="btn-primary vacancy-btn"
+            data-vacancy="volunteer-coach"
+            >Apply Now</a
+          >
         </div>
       </div>
 
@@ -3588,15 +3641,24 @@
           </div>
           <div class="vacancy-perk">
             <span class="vacancy-perk-icon">📋</span>
-            <span>Exposure to structured GFA-registered development programmes</span>
+            <span
+              >Exposure to structured GFA-registered development
+              programmes</span
+            >
           </div>
           <div class="vacancy-perk">
             <span class="vacancy-perk-icon">📈</span>
-            <span>Career growth, certifications &amp; mentorship opportunities</span>
+            <span
+              >Career growth, certifications &amp; mentorship
+              opportunities</span
+            >
           </div>
           <div class="vacancy-perk">
             <span class="vacancy-perk-icon">🌍</span>
-            <span>Experience in international football camps &amp; cross-cultural coaching</span>
+            <span
+              >Experience in international football camps &amp; cross-cultural
+              coaching</span
+            >
           </div>
         </div>
       </div>
@@ -3661,9 +3723,7 @@
     <div class="sec-bg" id="success">
       <div class="sec">
         <p class="tag reveal">Proven Pathway</p>
-        <h2 class="reveal reveal-d1">
-          SUCCESS <span class="y">STORIES</span>
-        </h2>
+        <h2 class="reveal reveal-d1">SUCCESS <span class="y">STORIES</span></h2>
         <p class="intro reveal reveal-d2">
           From Sacred Vision Football Academy to professional contracts and
           international academies — our players are living proof that the
@@ -3680,7 +3740,9 @@
             </div>
             <div class="success-body">
               <div class="success-name">Osman Yousif</div>
-              <div class="success-role">Accra Lions FC — Ghana Premier League</div>
+              <div class="success-role">
+                Accra Lions FC — Ghana Premier League
+              </div>
               <div class="success-desc">
                 A dynamic winger developed by Sacred Vision Football Academy who
                 earned a move to Accra Lions FC in September 2024 to compete in
@@ -3705,7 +3767,9 @@
             </div>
             <div class="success-body">
               <div class="success-name">Ahmed Yousif</div>
-              <div class="success-role">Accra Lions FC — Ghana Premier League</div>
+              <div class="success-role">
+                Accra Lions FC — Ghana Premier League
+              </div>
               <div class="success-desc">
                 An explosive offensive all-rounder developed by Sacred Vision
                 Football Academy who signed with Accra Lions FC in September
@@ -3731,7 +3795,9 @@
             </div>
             <div class="success-body">
               <div class="success-name">Lil Romeo Olu Lamptey</div>
-              <div class="success-role">FCV International Football Academy, UK</div>
+              <div class="success-role">
+                FCV International Football Academy, UK
+              </div>
               <div class="success-desc">
                 A talented winger developed by Sacred Vision Football Academy,
                 currently progressing on a pathway with FCV International
@@ -3757,7 +3823,9 @@
             </div>
             <div class="success-body">
               <div class="success-name">Evans Nkansa</div>
-              <div class="success-role">Varsity Nine Football & Education Programme, UK</div>
+              <div class="success-role">
+                Varsity Nine Football & Education Programme, UK
+              </div>
               <div class="success-desc">
                 A technically gifted and physically dominant midfielder
                 developed by Sacred Vision Football Academy. After gaining
@@ -3769,7 +3837,9 @@
               <div class="success-meta">
                 <span class="success-tag position">Midfielder</span>
                 <span class="success-tag date">Spain &amp; UK Pathway</span>
-                <span class="success-tag award">Alicante &middot; Varsity Nine</span>
+                <span class="success-tag award"
+                  >Alicante &middot; Varsity Nine</span
+                >
               </div>
             </div>
           </div>
@@ -3787,8 +3857,8 @@
           INSIDE <span class="g">SACRED VISION</span>
         </h2>
         <p class="intro reveal reveal-d2">
-          Training, matches, community, and the Ghana experience — follow us
-          for live updates straight from the pitch.
+          Training, matches, community, and the Ghana experience — follow us for
+          live updates straight from the pitch.
         </p>
         <div class="ig-feed-wrap reveal reveal-d2">
           <div class="ig-header">
@@ -3818,7 +3888,7 @@
               allowtransparency="true"
               loading="lazy"
               class="lazy-iframe"
-              style="border: none; border-radius: 12px; min-height: 600px;"
+              style="border: none; border-radius: 12px; min-height: 600px"
             ></iframe>
           </div>
           <div class="ig-cta">
@@ -3827,9 +3897,18 @@
               target="_blank"
               rel="noopener"
               class="btn-primary"
-              style="display: inline-flex; align-items: center; gap: 8px;"
+              style="display: inline-flex; align-items: center; gap: 8px"
             >
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              <svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                />
+              </svg>
               View All Posts on Instagram
             </a>
           </div>
@@ -5318,7 +5397,6 @@
       </div>
     </div>
 
-
     <!-- SAFEGUARDING & SAFETY -->
     <section class="sec" id="safety">
       <p class="tag reveal">Player Welfare</p>
@@ -5551,10 +5629,9 @@
             <div class="tourist-info">
               <div class="tourist-name">Fort Amsterdam</div>
               <div class="tourist-desc">
-                A historic Dutch colonial fort in Abandze, Central Region.
-                One of the lesser-known but fascinating heritage sites along
-                the Gold Coast, offering a quieter, immersive historical
-                experience.
+                A historic Dutch colonial fort in Abandze, Central Region. One
+                of the lesser-known but fascinating heritage sites along the
+                Gold Coast, offering a quieter, immersive historical experience.
               </div>
             </div>
           </div>
@@ -5567,9 +5644,9 @@
             <div class="tourist-info">
               <div class="tourist-name">Elmina River</div>
               <div class="tourist-desc">
-                A scenic river flowing through the historic town of Elmina.
-                Take a peaceful boat ride, enjoy the views, and experience
-                the beauty of the Central Region's waterways.
+                A scenic river flowing through the historic town of Elmina. Take
+                a peaceful boat ride, enjoy the views, and experience the beauty
+                of the Central Region's waterways.
               </div>
             </div>
           </div>
@@ -5591,8 +5668,6 @@
         </div>
       </div>
     </div>
-
-
 
     <!-- EMAIL CAPTURE -->
     <div class="email-bar">
@@ -6079,9 +6154,9 @@
           background: "var(--bg)",
           color: "var(--text2)",
           customClass: {
-            popup: 'swal-popup-custom',
-            confirmButton: 'swal-btn-confirm',
-            cancelButton: 'swal-btn-cancel',
+            popup: "swal-popup-custom",
+            confirmButton: "swal-btn-confirm",
+            cancelButton: "swal-btn-cancel",
           },
           preConfirm: () => {
             const email = document.getElementById("swal-email").value;
@@ -6099,7 +6174,7 @@
             const { email, name } = result.value;
 
             const handler = PaystackPop.setup({
-              key: "pk_test_e3e9b8f7ea32e096e2e0c47058096c6c6c6b7052",
+              key: "pk_live_48038ace40f586d6bf965659ced32e50ad36d470",
               email: email,
               amount: amount * 100,
               currency: currency,
@@ -6132,7 +6207,7 @@
                   confirmButtonColor: "#00A8C8",
                   background: "var(--bg)",
                   color: "var(--text)",
-                  customClass: { popup: 'swal-popup-custom' },
+                  customClass: { popup: "swal-popup-custom" },
                 });
               },
               onClose: function () {
@@ -6147,7 +6222,7 @@
                   cancelButtonText: "Email Support",
                   background: "var(--bg)",
                   color: "var(--text)",
-                  customClass: { popup: 'swal-popup-custom' },
+                  customClass: { popup: "swal-popup-custom" },
                 }).then((result) => {
                   if (result.isConfirmed) {
                     window.open("https://wa.me/233244997316", "_blank");
@@ -6316,7 +6391,9 @@
         },
         { rootMargin: "200px" },
       );
-      document.querySelectorAll(".lazy-iframe").forEach((f) => iframeObserver.observe(f));
+      document
+        .querySelectorAll(".lazy-iframe")
+        .forEach((f) => iframeObserver.observe(f));
 
       // ── SCROLL REVEAL ─────────────────────────────────────
       const revealObserver = new IntersectionObserver(
@@ -6484,7 +6561,6 @@
             }, 3000);
           }, 800);
         });
-
     </script>
 
     <!-- TERMS & CONDITIONS MODAL -->
@@ -6548,7 +6624,9 @@
         <p>These terms are governed by the laws of the Republic of Ghana.</p>
         <p>
           For questions about these terms, contact
-          <a href="mailto:info@sacredfootballclub.com" style="color: var(--teal)"
+          <a
+            href="mailto:info@sacredfootballclub.com"
+            style="color: var(--teal)"
             >info@sacredfootballclub.com</a
           >.
         </p>
@@ -6591,7 +6669,9 @@
         <p>
           You may request access to, correction of, or deletion of your personal
           data at any time by contacting us at
-          <a href="mailto:info@sacredfootballclub.com" style="color: var(--teal)"
+          <a
+            href="mailto:info@sacredfootballclub.com"
+            style="color: var(--teal)"
             >info@sacredfootballclub.com</a
           >.
         </p>
@@ -6604,7 +6684,9 @@
         <h4>7. Contact</h4>
         <p>
           For privacy-related inquiries, contact
-          <a href="mailto:info@sacredfootballclub.com" style="color: var(--teal)"
+          <a
+            href="mailto:info@sacredfootballclub.com"
+            style="color: var(--teal)"
             >info@sacredfootballclub.com</a
           >.
         </p>
@@ -6614,50 +6696,95 @@
     <!-- REGISTRATION FORM MODAL -->
     <div class="vacancy-overlay" id="registerModal">
       <div class="vacancy-form-box">
-        <button class="vf-close" onclick="document.getElementById('registerModal').classList.remove('active')">&times;</button>
-        <h3>REGISTER FOR <span style="color:var(--teal)">SUMMER CAMP 2026</span></h3>
-        <p class="vf-sub">Sacred Vision Football Academy — Enyan-Abaasa, Ghana</p>
+        <button
+          class="vf-close"
+          onclick="
+            document.getElementById('registerModal').classList.remove('active')
+          "
+        >
+          &times;
+        </button>
+        <h3>
+          REGISTER FOR <span style="color: var(--teal)">SUMMER CAMP 2026</span>
+        </h3>
+        <p class="vf-sub">
+          Sacred Vision Football Academy — Enyan-Abaasa, Ghana
+        </p>
         <form
           id="registerForm"
           action="https://formsubmit.co/info@sacredfootballclub.com"
           method="POST"
         >
-          <input type="hidden" name="_subject" value="New Camp Registration — Sacred Vision FC Summer Camp 2026">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="text" name="_honey" style="display:none">
-          <input type="hidden" name="_next" id="reg-redirect" value="">
+          <input
+            type="hidden"
+            name="_subject"
+            value="New Camp Registration — Sacred Vision FC Summer Camp 2026"
+          />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="text" name="_honey" style="display: none" />
+          <input type="hidden" name="_next" id="reg-redirect" value="" />
 
           <div class="vf-row">
             <div class="vf-group">
               <label for="reg-fname">First Name *</label>
-              <input type="text" id="reg-fname" name="First Name" required placeholder="John">
+              <input
+                type="text"
+                id="reg-fname"
+                name="First Name"
+                required
+                placeholder="John"
+              />
             </div>
             <div class="vf-group">
               <label for="reg-lname">Last Name *</label>
-              <input type="text" id="reg-lname" name="Last Name" required placeholder="Doe">
+              <input
+                type="text"
+                id="reg-lname"
+                name="Last Name"
+                required
+                placeholder="Doe"
+              />
             </div>
           </div>
 
           <div class="vf-row">
             <div class="vf-group">
               <label for="reg-email">Email Address *</label>
-              <input type="email" id="reg-email" name="Email" required placeholder="you@example.com">
+              <input
+                type="email"
+                id="reg-email"
+                name="Email"
+                required
+                placeholder="you@example.com"
+              />
             </div>
             <div class="vf-group">
               <label for="reg-phone">Phone Number *</label>
-              <input type="tel" id="reg-phone" name="Phone" required placeholder="+233 24 000 0000">
+              <input
+                type="tel"
+                id="reg-phone"
+                name="Phone"
+                required
+                placeholder="+233 24 000 0000"
+              />
             </div>
           </div>
 
           <div class="vf-row">
             <div class="vf-group">
               <label for="reg-dob">Date of Birth *</label>
-              <input type="date" id="reg-dob" name="Date of Birth" required>
+              <input type="date" id="reg-dob" name="Date of Birth" required />
             </div>
             <div class="vf-group">
               <label for="reg-nationality">Nationality *</label>
-              <input type="text" id="reg-nationality" name="Nationality" required placeholder="e.g. Ghanaian">
+              <input
+                type="text"
+                id="reg-nationality"
+                name="Nationality"
+                required
+                placeholder="e.g. Ghanaian"
+              />
             </div>
           </div>
 
@@ -6669,9 +6796,13 @@
                 <option value="Goalkeeper">Goalkeeper</option>
                 <option value="Centre-Back">Centre-Back</option>
                 <option value="Full-Back">Full-Back</option>
-                <option value="Defensive Midfielder">Defensive Midfielder</option>
+                <option value="Defensive Midfielder">
+                  Defensive Midfielder
+                </option>
                 <option value="Central Midfielder">Central Midfielder</option>
-                <option value="Attacking Midfielder">Attacking Midfielder</option>
+                <option value="Attacking Midfielder">
+                  Attacking Midfielder
+                </option>
                 <option value="Winger">Winger</option>
                 <option value="Striker">Striker</option>
               </select>
@@ -6680,9 +6811,15 @@
               <label for="reg-programme">Programme Duration *</label>
               <select id="reg-programme" name="Programme Duration" required>
                 <option value="" disabled selected>Select duration…</option>
-                <option value="2-Week Programme (14 days)">2-Week Programme (14 days)</option>
-                <option value="1-Month Programme (30 days)">1-Month Programme (30 days)</option>
-                <option value="3-Month Programme (90 days)">3-Month Programme (90 days)</option>
+                <option value="2-Week Programme (14 days)">
+                  2-Week Programme (14 days)
+                </option>
+                <option value="1-Month Programme (30 days)">
+                  1-Month Programme (30 days)
+                </option>
+                <option value="3-Month Programme (90 days)">
+                  3-Month Programme (90 days)
+                </option>
               </select>
             </div>
           </div>
@@ -6710,26 +6847,43 @@
               <select id="reg-rate" name="Rate Type" required>
                 <option value="" disabled selected>Select rate…</option>
                 <option value="Local Rate (GHS)">Local Rate (GHS)</option>
-                <option value="International Rate (USD)">International Rate (USD)</option>
+                <option value="International Rate (USD)">
+                  International Rate (USD)
+                </option>
               </select>
             </div>
             <div class="vf-group">
               <label for="reg-parent">Parent/Guardian Name</label>
-              <input type="text" id="reg-parent" name="Parent Guardian Name" placeholder="If under 18">
+              <input
+                type="text"
+                id="reg-parent"
+                name="Parent Guardian Name"
+                placeholder="If under 18"
+              />
             </div>
           </div>
 
           <div class="vf-group">
             <label for="reg-medical">Medical Conditions / Allergies</label>
-            <textarea id="reg-medical" name="Medical Info" placeholder="Any medical conditions, allergies, or dietary requirements we should know about…"></textarea>
+            <textarea
+              id="reg-medical"
+              name="Medical Info"
+              placeholder="Any medical conditions, allergies, or dietary requirements we should know about…"
+            ></textarea>
           </div>
 
           <div class="vf-group">
             <label for="reg-extra">Anything else?</label>
-            <textarea id="reg-extra" name="Additional Info" placeholder="Previous football experience, current club, questions, etc."></textarea>
+            <textarea
+              id="reg-extra"
+              name="Additional Info"
+              placeholder="Previous football experience, current club, questions, etc."
+            ></textarea>
           </div>
 
-          <button type="submit" class="vf-submit" id="reg-submit-btn">Submit Registration</button>
+          <button type="submit" class="vf-submit" id="reg-submit-btn">
+            Submit Registration
+          </button>
         </form>
       </div>
     </div>
@@ -6737,8 +6891,17 @@
     <!-- VACANCY APPLICATION MODAL -->
     <div class="vacancy-overlay" id="vacancyModal">
       <div class="vacancy-form-box">
-        <button class="vf-close" onclick="document.getElementById('vacancyModal').classList.remove('active')">&times;</button>
-        <h3>APPLY FOR: <span id="vf-role-title" style="color:var(--teal)"></span></h3>
+        <button
+          class="vf-close"
+          onclick="
+            document.getElementById('vacancyModal').classList.remove('active')
+          "
+        >
+          &times;
+        </button>
+        <h3>
+          APPLY FOR: <span id="vf-role-title" style="color: var(--teal)"></span>
+        </h3>
         <p class="vf-sub">Sacred Vision Football Club</p>
         <form
           id="vacancyForm"
@@ -6746,43 +6909,91 @@
           method="POST"
         >
           <!-- FormSubmit config -->
-          <input type="hidden" name="_subject" id="vf-email-subject" value="New Coaching Application — Sacred Vision FC">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="text" name="_honey" style="display:none">
-          <input type="hidden" name="_next" id="vf-redirect" value="">
-          <input type="hidden" name="Position Applied For" id="vf-position-hidden" value="">
+          <input
+            type="hidden"
+            name="_subject"
+            id="vf-email-subject"
+            value="New Coaching Application — Sacred Vision FC"
+          />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="text" name="_honey" style="display: none" />
+          <input type="hidden" name="_next" id="vf-redirect" value="" />
+          <input
+            type="hidden"
+            name="Position Applied For"
+            id="vf-position-hidden"
+            value=""
+          />
 
           <div class="vf-row">
             <div class="vf-group">
               <label for="vf-fname">First Name *</label>
-              <input type="text" id="vf-fname" name="First Name" required placeholder="John">
+              <input
+                type="text"
+                id="vf-fname"
+                name="First Name"
+                required
+                placeholder="John"
+              />
             </div>
             <div class="vf-group">
               <label for="vf-lname">Last Name *</label>
-              <input type="text" id="vf-lname" name="Last Name" required placeholder="Doe">
+              <input
+                type="text"
+                id="vf-lname"
+                name="Last Name"
+                required
+                placeholder="Doe"
+              />
             </div>
           </div>
 
           <div class="vf-row">
             <div class="vf-group">
               <label for="vf-email">Email Address *</label>
-              <input type="email" id="vf-email" name="Email" required placeholder="you@example.com">
+              <input
+                type="email"
+                id="vf-email"
+                name="Email"
+                required
+                placeholder="you@example.com"
+              />
             </div>
             <div class="vf-group">
               <label for="vf-phone">Phone Number *</label>
-              <input type="tel" id="vf-phone" name="Phone" required placeholder="+233 24 000 0000">
+              <input
+                type="tel"
+                id="vf-phone"
+                name="Phone"
+                required
+                placeholder="+233 24 000 0000"
+              />
             </div>
           </div>
 
           <div class="vf-row">
             <div class="vf-group">
               <label for="vf-nationality">Nationality *</label>
-              <input type="text" id="vf-nationality" name="Nationality" required placeholder="e.g. Ghanaian">
+              <input
+                type="text"
+                id="vf-nationality"
+                name="Nationality"
+                required
+                placeholder="e.g. Ghanaian"
+              />
             </div>
             <div class="vf-group">
               <label for="vf-age">Age *</label>
-              <input type="number" id="vf-age" name="Age" required min="18" max="65" placeholder="e.g. 28">
+              <input
+                type="number"
+                id="vf-age"
+                name="Age"
+                required
+                min="18"
+                max="65"
+                placeholder="e.g. 28"
+              />
             </div>
           </div>
 
@@ -6790,16 +7001,24 @@
             <label for="vf-position">Position Applying For *</label>
             <select id="vf-position" name="Position" required>
               <option value="" disabled selected>Select a role…</option>
-              <option value="Football Coach (Lead Coach)">Football Coach (Lead Coach)</option>
-              <option value="Assistant Football Coach">Assistant Football Coach</option>
-              <option value="Volunteer / Development Coach">Volunteer / Development Coach</option>
+              <option value="Football Coach (Lead Coach)">
+                Football Coach (Lead Coach)
+              </option>
+              <option value="Assistant Football Coach">
+                Assistant Football Coach
+              </option>
+              <option value="Volunteer / Development Coach">
+                Volunteer / Development Coach
+              </option>
             </select>
           </div>
 
           <div class="vf-group">
             <label for="vf-experience">Coaching Experience *</label>
             <select id="vf-experience" name="Coaching Experience" required>
-              <option value="" disabled selected>Select experience level…</option>
+              <option value="" disabled selected>
+                Select experience level…
+              </option>
               <option value="No formal experience">No formal experience</option>
               <option value="Less than 1 year">Less than 1 year</option>
               <option value="1–3 years">1–3 years</option>
@@ -6809,26 +7028,52 @@
           </div>
 
           <div class="vf-group">
-            <label for="vf-qualifications">Coaching Qualifications / Licences</label>
-            <input type="text" id="vf-qualifications" name="Qualifications" placeholder="e.g. GFA Licence C, UEFA B, CAF D">
+            <label for="vf-qualifications"
+              >Coaching Qualifications / Licences</label
+            >
+            <input
+              type="text"
+              id="vf-qualifications"
+              name="Qualifications"
+              placeholder="e.g. GFA Licence C, UEFA B, CAF D"
+            />
           </div>
 
           <div class="vf-group">
             <label for="vf-availability">Availability / Start Date *</label>
-            <input type="text" id="vf-availability" name="Availability" required placeholder="e.g. Available from June 2026">
+            <input
+              type="text"
+              id="vf-availability"
+              name="Availability"
+              required
+              placeholder="e.g. Available from June 2026"
+            />
           </div>
 
           <div class="vf-group">
-            <label for="vf-why">Why do you want to join Sacred Vision FC? *</label>
-            <textarea id="vf-why" name="Motivation" required placeholder="Tell us about your passion for coaching and why you'd be a great fit…"></textarea>
+            <label for="vf-why"
+              >Why do you want to join Sacred Vision FC? *</label
+            >
+            <textarea
+              id="vf-why"
+              name="Motivation"
+              required
+              placeholder="Tell us about your passion for coaching and why you'd be a great fit…"
+            ></textarea>
           </div>
 
           <div class="vf-group">
             <label for="vf-extra">Anything else we should know?</label>
-            <textarea id="vf-extra" name="Additional Info" placeholder="Links to CV, portfolio, social media, etc."></textarea>
+            <textarea
+              id="vf-extra"
+              name="Additional Info"
+              placeholder="Links to CV, portfolio, social media, etc."
+            ></textarea>
           </div>
 
-          <button type="submit" class="vf-submit" id="vf-submit-btn">Submit Application</button>
+          <button type="submit" class="vf-submit" id="vf-submit-btn">
+            Submit Application
+          </button>
         </form>
       </div>
     </div>
@@ -6880,31 +7125,38 @@
         if (e.target === vacancyModal) vacancyModal.classList.remove("active");
       });
 
-      document.getElementById("vacancyForm").addEventListener("submit", function () {
-        const btn = document.getElementById("vf-submit-btn");
-        btn.textContent = "Submitting…";
-        btn.disabled = true;
-      });
+      document
+        .getElementById("vacancyForm")
+        .addEventListener("submit", function () {
+          const btn = document.getElementById("vf-submit-btn");
+          btn.textContent = "Submitting…";
+          btn.disabled = true;
+        });
 
       // ── REGISTRATION FORM MODAL ─────────────────────────
       const registerModal = document.getElementById("registerModal");
       registerModal.addEventListener("click", (e) => {
-        if (e.target === registerModal) registerModal.classList.remove("active");
+        if (e.target === registerModal)
+          registerModal.classList.remove("active");
       });
       document.getElementById("reg-redirect").value =
         window.location.origin + window.location.pathname + "#pricing";
-      document.getElementById("registerForm").addEventListener("submit", function () {
-        const btn = document.getElementById("reg-submit-btn");
-        btn.textContent = "Submitting…";
-        btn.disabled = true;
-      });
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function () {
+          const btn = document.getElementById("reg-submit-btn");
+          btn.textContent = "Submitting…";
+          btn.disabled = true;
+        });
 
       // ── ESCAPE KEY closes any open modal ──────────────────
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
-          document.querySelectorAll(".legal-overlay.active, .vacancy-overlay.active").forEach((m) => {
-            m.classList.remove("active");
-          });
+          document
+            .querySelectorAll(".legal-overlay.active, .vacancy-overlay.active")
+            .forEach((m) => {
+              m.classList.remove("active");
+            });
         }
       });
     </script>
