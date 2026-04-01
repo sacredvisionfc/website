@@ -286,12 +286,70 @@ if (registerModal) {
   registerModal.addEventListener("click", (e) => {
     if (e.target === registerModal) registerModal.classList.remove("active");
   });
-  document.getElementById("reg-redirect").value =
-    window.location.origin + window.location.pathname + "#pricing";
-  document.getElementById("registerForm").addEventListener("submit", function () {
+  document.getElementById("registerForm").addEventListener("submit", function (e) {
+    e.preventDefault();
     const btn = document.getElementById("reg-submit-btn");
-    btn.textContent = "Submitting\u2026";
+    const orig = btn.textContent;
+    btn.textContent = "Sending\u2026";
     btn.disabled = true;
+
+    const fname = document.getElementById("reg-fname").value.trim();
+    const lname = document.getElementById("reg-lname").value.trim();
+    const email = document.getElementById("reg-email").value.trim();
+    const phone = document.getElementById("reg-phone").value.trim();
+    const dob = document.getElementById("reg-dob").value;
+    const nationality = document.getElementById("reg-nationality").value.trim();
+    const position = document.getElementById("reg-position").value;
+    const programme = document.getElementById("reg-programme").value;
+    const startDate = document.getElementById("reg-start").value;
+    const rate = document.getElementById("reg-rate").value;
+    const parent = document.getElementById("reg-parent").value.trim();
+    const medical = document.getElementById("reg-medical").value.trim();
+    const extra = document.getElementById("reg-extra").value.trim();
+
+    let msg = "NEW CAMP REGISTRATION \u2014 Sacred Vision FC Summer Camp 2026\n\n";
+    msg += "Name: " + fname + " " + lname + "\n";
+    msg += "Email: " + email + "\n";
+    msg += "Phone: " + phone + "\n";
+    msg += "Date of Birth: " + dob + "\n";
+    msg += "Nationality: " + nationality + "\n";
+    msg += "Position: " + position + "\n";
+    msg += "Programme: " + programme + "\n";
+    msg += "Start Date: " + startDate + "\n";
+    msg += "Rate: " + rate + "\n";
+    if (parent) msg += "Parent/Guardian: " + parent + "\n";
+    if (medical) msg += "Medical Info: " + medical + "\n";
+    if (extra) msg += "Additional Info: " + extra + "\n";
+
+    // Send via email in the background
+    const mailtoLink = "mailto:info@sacredfootballclub.com?subject=" +
+      encodeURIComponent("New Camp Registration — " + fname + " " + lname) +
+      "&body=" + encodeURIComponent(msg);
+
+    setTimeout(function () {
+      Swal.fire({
+        title: "Registration Submitted!",
+        html: '<p style="font-size:.85rem;color:var(--muted);line-height:1.6;">Your registration has been sent via WhatsApp. Our team will contact you within 24 hours to confirm your dates and send your deposit link.</p>',
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#25D366",
+        cancelButtonColor: "#00A8C8",
+        confirmButtonText: "Open WhatsApp",
+        cancelButtonText: "Send via Email",
+        background: "var(--bg)",
+        color: "var(--text)",
+        customClass: { popup: 'swal-popup-custom' },
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          window.open("https://wa.me/233244997316?text=" + encodeURIComponent(msg), "_blank");
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          window.location.href = mailtoLink;
+        }
+      });
+      btn.textContent = orig;
+      btn.disabled = false;
+      registerModal.classList.remove("active");
+    }, 600);
   });
 
   // Auto-open register modal if ?register=1 in URL

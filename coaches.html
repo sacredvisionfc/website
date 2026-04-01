@@ -15,7 +15,7 @@
     <meta property="og:title" content="Coaches & Vacancies — Sacred Vision Football Academy" />
     <meta property="og:description" content="Meet the coaching staff at Sacred Vision Football Academy. View current coaching vacancies and apply to join our team in Enyan-Abaasa, Ghana." />
     <meta property="og:image" content="https://www.sacredvisionfootball.com/images/og-share.jpg" />
-    <meta property="og:url" content="https://sacredvisionfc.com" />
+    <meta property="og:url" content="https://www.sacredvisionfootball.com/coaches" />
     <meta property="og:site_name" content="Sacred Vision Football Academy" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Coaches & Vacancies — Sacred Vision Football Academy" />
@@ -27,8 +27,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/styles.min.css?v=1.0" />
     <!-- Google Analytics -->
@@ -55,6 +53,7 @@
         <li><a href="coaches.html#vacancies">Vacancies</a></li>
         <li><a href="pricing.html">Pricing</a></li>
         <li><a href="gallery.html">Instagram</a></li>
+        <li><a href="blog.html">Blog</a></li>
         <li><a href="index.html#contact">Contact</a></li>
       </ul>
       <div class="nav-right">
@@ -68,13 +67,14 @@
       </div>
     </nav>
 
+    <main id="main-content">
     <!-- COACHES -->
-    <div class="sec-bg" id="main-content">
+    <div class="sec-bg">
       <div class="sec">
         <p class="tag reveal">Coaching Staff</p>
-        <h2 class="reveal reveal-d1">
+        <h1 class="reveal reveal-d1">
           Meet the Coaches
-        </h2>
+        </h1>
         <p class="intro reveal reveal-d2">
           Professional experience, deep knowledge of player development, and
           genuine passion for nurturing talent in Ghana's Central Region.
@@ -82,17 +82,17 @@
         <div class="coaches-grid">
           <div class="coach-card">
             <div class="coach-photo">
-              <picture><source srcset="images/ig_13.webp" type="image/webp"><img
-                src="images/ig_13.jpg"
-                width="480"
+              <img
+                src="images/coach-vincent.jpeg"
+                width="800"
                 height="600"
                 alt="Coach Vincent — Technical Director"
                 loading="lazy"
-              /></picture>
+              />
             </div>
             <div class="coach-body">
               <div class="coach-name">Coach Vincent</div>
-              <div class="coach-role">Technical Director & Head Coach</div>
+              <div class="coach-role">Technical Director</div>
               <div class="coach-bio">
                 Founded Sacred Vision Football Academy. Runs the daily technical programme and oversees all player development at the academy.
               </div>
@@ -123,29 +123,6 @@
                 <span class="coach-cred">Head Coach</span>
                 <span class="coach-cred">Tactical Strategy</span>
                 <span class="coach-cred">Video Analysis</span>
-              </div>
-            </div>
-          </div>
-          <div class="coach-card">
-            <div class="coach-photo">
-              <picture><source srcset="images/ig_15.webp" type="image/webp"><img
-                src="images/ig_15.jpg"
-                width="482"
-                height="600"
-                alt="Fitness Coach — Physical Conditioning"
-                loading="lazy"
-              /></picture>
-            </div>
-            <div class="coach-body">
-              <div class="coach-name">Fitness Coach</div>
-              <div class="coach-role">Physical Conditioning</div>
-              <div class="coach-bio">
-                Designing and leading the physical conditioning programme.
-                Speed, agility, and athletic development for young footballers.
-              </div>
-              <div class="coach-creds">
-                <span class="coach-cred">S&C Specialist</span>
-                <span class="coach-cred">Speed & Agility</span>
               </div>
             </div>
           </div>
@@ -257,15 +234,8 @@
         <p class="vf-sub">Sacred Vision Football Club</p>
         <form
           id="vacancyForm"
-          action="https://formsubmit.co/info@sacredfootballclub.com"
-          method="POST"
+          onsubmit="return false;"
         >
-          <!-- FormSubmit config -->
-          <input type="hidden" name="_subject" id="vf-email-subject" value="New Coaching Application — Sacred Vision FC">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="text" name="_honey" style="display:none">
-          <input type="hidden" name="_next" id="vf-redirect" value="">
           <input type="hidden" name="Position Applied For" id="vf-position-hidden" value="">
 
           <div class="vf-row">
@@ -339,8 +309,13 @@
           </div>
 
           <div class="vf-group">
+            <label for="vf-cv">Upload CV / Resume (PDF, max 5 MB)</label>
+            <input type="file" id="vf-cv" name="CV" accept=".pdf,.doc,.docx" style="padding:10px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);width:100%;box-sizing:border-box;">
+          </div>
+
+          <div class="vf-group">
             <label for="vf-extra">Anything else we should know?</label>
-            <textarea id="vf-extra" name="Additional Info" placeholder="Links to CV, portfolio, social media, etc."></textarea>
+            <textarea id="vf-extra" name="Additional Info" placeholder="Links to portfolio, social media, etc."></textarea>
           </div>
 
           <button type="submit" class="vf-submit" id="vf-submit-btn">Submit Application</button>
@@ -348,6 +323,7 @@
       </div>
     </div>
 
+    </main>
     <footer>
       <div class="footer-top">
         <div>
@@ -393,6 +369,7 @@
             <li><a href="pricing.html">Pricing</a></li>
             <li><a href="pricing.html?register=1">Register</a></li>
             <li><a href="gallery.html">Instagram</a></li>
+            <li><a href="blog.html">Blog</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -624,7 +601,6 @@
           var roleName = roleMap[key] || "";
           document.getElementById("vf-role-title").textContent = roleName;
           document.getElementById("vf-position-hidden").value = roleName;
-          document.getElementById("vf-email-subject").value = "New Coaching Application — " + roleName + " — Sacred Vision FC";
           var select = document.getElementById("vf-position");
           for (var i = 0; i < select.options.length; i++) {
             if (select.options[i].value === roleName) {
@@ -632,20 +608,103 @@
               break;
             }
           }
-          document.getElementById("vf-redirect").value = window.location.origin + window.location.pathname + "#vacancies";
           vacancyModal.classList.add("active");
         });
       });
       vacancyModal.addEventListener("click", function(e) {
         if (e.target === vacancyModal) vacancyModal.classList.remove("active");
       });
-      document.getElementById("vacancyForm").addEventListener("submit", function() {
+      document.getElementById("vacancyForm").addEventListener("submit", function(e) {
+        e.preventDefault();
         var btn = document.getElementById("vf-submit-btn");
-        btn.textContent = "Submitting...";
+        var orig = btn.textContent;
+        btn.textContent = "Sending...";
         btn.disabled = true;
+
+        // Check CV file size (max 5MB)
+        var cvInput = document.getElementById("vf-cv");
+        if (cvInput.files.length > 0 && cvInput.files[0].size > 5 * 1024 * 1024) {
+          Swal.fire({ icon: "error", title: "File Too Large", text: "CV must be under 5 MB.", background: "var(--card)", color: "var(--text)" });
+          btn.textContent = orig;
+          btn.disabled = false;
+          return;
+        }
+
+        var fname = document.getElementById("vf-fname").value.trim();
+        var lname = document.getElementById("vf-lname").value.trim();
+        var position = document.getElementById("vf-position").value;
+        var hadCV = cvInput.files.length > 0;
+        var cvName = hadCV ? cvInput.files[0].name : "";
+
+        var formData = new FormData();
+        formData.append("access_key", "34b15cce-97e2-47df-8ad6-cc13822b374f");
+        formData.append("subject", "Coaching Application \u2014 " + fname + " " + lname + " \u2014 " + position);
+        formData.append("from_name", "SVFA Website");
+        formData.append("First Name", fname);
+        formData.append("Last Name", lname);
+        formData.append("Email", document.getElementById("vf-email").value.trim());
+        formData.append("Phone", document.getElementById("vf-phone").value.trim());
+        formData.append("Nationality", document.getElementById("vf-nationality").value.trim());
+        formData.append("Age", document.getElementById("vf-age").value);
+        formData.append("Position", position);
+        formData.append("Coaching Experience", document.getElementById("vf-experience").value);
+        formData.append("Qualifications", document.getElementById("vf-qualifications").value.trim());
+        formData.append("Availability", document.getElementById("vf-availability").value.trim());
+        formData.append("Motivation", document.getElementById("vf-why").value.trim());
+        formData.append("Additional Info", document.getElementById("vf-extra").value.trim());
+        if (hadCV) {
+          formData.append("CV Attached", "Yes \u2014 " + cvName + " (applicant will send via email)");
+        }
+
+        fetch("https://api.web3forms.com/submit", { method: "POST", body: formData })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          btn.textContent = orig;
+          btn.disabled = false;
+          if (data.success) {
+            vacancyModal.classList.remove("active");
+            document.getElementById("vacancyForm").reset();
+            if (hadCV) {
+              var mailSubject = encodeURIComponent("CV \u2014 " + fname + " " + lname + " \u2014 " + position);
+              var mailBody = encodeURIComponent("Hi Sacred Vision FC,\n\nPlease find my CV attached for the " + position + " position.\n\nBest regards,\n" + fname + " " + lname);
+              var mailtoLink = "mailto:info@sacredfootballclub.com?subject=" + mailSubject + "&body=" + mailBody;
+              Swal.fire({
+                icon: "success",
+                title: "Application Sent!",
+                html: "Your details have been submitted.<br><br><strong>One more step:</strong> Please send your CV via email by clicking the button below.",
+                confirmButtonText: "Send CV via Email",
+                confirmButtonColor: "#00b894",
+                showCancelButton: true,
+                cancelButtonText: "Done",
+                background: "var(--card)",
+                color: "var(--text)"
+              }).then(function(result) {
+                if (result.isConfirmed) {
+                  window.location.href = mailtoLink;
+                }
+              });
+            } else {
+              Swal.fire({
+                icon: "success",
+                title: "Application Sent!",
+                html: "Thank you for applying. We\u2019ll review your application and get back to you soon.",
+                confirmButtonColor: "#00b894",
+                background: "var(--card)",
+                color: "var(--text)"
+              });
+            }
+          } else {
+            Swal.fire({ icon: "error", title: "Submission Failed", text: data.message || "Please try again or contact us directly.", background: "var(--card)", color: "var(--text)" });
+          }
+        })
+        .catch(function() {
+          btn.textContent = orig;
+          btn.disabled = false;
+          Swal.fire({ icon: "error", title: "Network Error", text: "Could not send. Please check your connection and try again.", background: "var(--card)", color: "var(--text)" });
+        });
       });
     </script>
-    <script src="js/shared.js"></script>
+    <script src="js/shared.js" defer></script>
     <!-- STRUCTURED DATA / SCHEMA MARKUP -->
     <script type="application/ld+json">
       {
