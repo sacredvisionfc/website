@@ -1,1204 +1,946 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flexible Payment — Sacred Vision Football Academy</title>
-    <meta name="description" content="Flexible weekly payment plans for SVFA Summer Camp 2026. Pay in GHS with live currency conversion for USD, EUR, GBP.">
-    <meta name="theme-color" content="#07100F">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    
-    <!-- Paystack SDK -->
-    <script src="https://js.paystack.co/v1/inline.js"></script>
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --teal: #00A8C8;
-            --teal-dark: #007A96;
-            --teal-light: #33C0D8;
-            --orange: #D4783A;
-            --orange-dark: #B05A22;
-            --orange-light: #E8955A;
-            --bg: #07100F;
-            --bg2: #0C1618;
-            --card: #111E22;
-            --card2: #16252A;
-            --border: #1E3038;
-            --border2: #162630;
-            --text: #EEF8FB;
-            --text2: #D2ECF2;
-            --muted: #6A8C96;
-            --input-bg: #0A1518;
-            --shadow: rgba(0,0,0,0.6);
-            --success: #10B981;
-            --warning: #F59E0B;
-        }
-        
-        [data-theme="light"] {
-            --bg: #F2F9FB;
-            --bg2: #E8F4F7;
-            --card: #FFFFFF;
-            --card2: #EEF7FA;
-            --border: #B8D8E2;
-            --border2: #CAE2EA;
-            --text: #0A1820;
-            --text2: #1A3040;
-            --muted: #527888;
-            --input-bg: #EAF4F8;
-            --shadow: rgba(0,80,100,0.12);
-        }
-        
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg2);
-            color: var(--text2);
-            transition: background 0.3s, color 0.3s;
-        }
-        
-        /* Navigation */
-        nav {
-            background: var(--bg);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 0 60px;
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border2);
-            backdrop-filter: blur(10px);
-        }
-        
-        .nav-logo {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.4rem;
-            letter-spacing: 0.1em;
-            color: var(--text);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .nav-logo a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .nav-logo span { color: var(--teal); }
-        
-        .nav-links {
-            display: flex;
-            gap: 28px;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            font-size: 0.82rem;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        
-        .nav-links a:hover,
-        .nav-links a.active { color: var(--teal); }
-        
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        
-        .theme-toggle {
-            background: var(--card);
-            border: 1px solid var(--border);
-            color: var(--muted);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-        
-        .theme-toggle:hover {
-            border-color: var(--teal);
-            color: var(--teal);
-        }
-        
-        .nav-cta {
-            background: var(--teal);
-            color: #fff;
-            font-weight: 700;
-            font-size: 0.78rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            padding: 10px 22px;
-            border-radius: 100px;
-            text-decoration: none;
-            transition: background 0.2s;
-        }
-        
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .hamburger span {
-            width: 22px;
-            height: 2px;
-            background: var(--text2);
-            border-radius: 2px;
-            transition: all 0.3s;
-        }
-        
-        /* Main Content */
-        .sec {
-            padding: 60px 60px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .tag {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.62rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--teal);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .tag::before {
-            content: '';
-            width: 28px;
-            height: 2px;
-            background: var(--teal);
-            display: block;
-        }
-        
-        h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            color: var(--text);
-            margin-bottom: 16px;
-            letter-spacing: 0.03em;
-        }
-        
-        h1 .g { color: var(--teal); }
-        h1 .y { color: var(--orange); }
-        
-        .intro {
-            font-size: 1rem;
-            color: var(--muted);
-            max-width: 600px;
-            line-height: 1.75;
-            margin-bottom: 48px;
-        }
-        
-        /* Calculator Card */
-        .calculator-card {
-            background: var(--card);
-            border-radius: 32px;
-            border: 1px solid var(--border);
-            padding: 40px;
-            margin-bottom: 40px;
-            box-shadow: 0 20px 40px var(--shadow);
-        }
-        
-        .calc-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-        
-        .calc-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--teal), var(--teal-dark));
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-        }
-        
-        .calc-header h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.8rem;
-            color: var(--text);
-            letter-spacing: 0.05em;
-        }
-        
-        /* Exchange Rate Banner */
-        .rate-banner {
-            background: linear-gradient(135deg, rgba(0,168,200,0.1), rgba(212,120,58,0.1));
-            border-radius: 16px;
-            padding: 16px 20px;
-            margin-bottom: 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            border-left: 4px solid var(--orange);
-        }
-        
-        .rate-banner p {
-            font-size: 0.85rem;
-            color: var(--text2);
-        }
-        
-        .rate-banner .update-time {
-            font-size: 0.7rem;
-            color: var(--muted);
-            font-family: 'Space Mono', monospace;
-        }
-        
-        .refresh-rates {
-            background: var(--card2);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 8px 16px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: var(--text2);
-        }
-        
-        .refresh-rates:hover {
-            border-color: var(--teal);
-            color: var(--teal);
-        }
-        
-        /* Week Selector */
-        .week-selector {
-            margin-bottom: 40px;
-        }
-        
-        .week-label {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.8rem;
-            letter-spacing: 0.1em;
-            color: var(--teal);
-            margin-bottom: 16px;
-            display: block;
-        }
-        
-        .week-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-        
-        .week-btn {
-            background: var(--input-bg);
-            border: 1px solid var(--border);
-            border-radius: 60px;
-            padding: 12px 24px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text2);
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: 'Outfit', sans-serif;
-        }
-        
-        .week-btn:hover {
-            border-color: var(--teal);
-            color: var(--teal);
-        }
-        
-        .week-btn.active {
-            background: var(--teal);
-            border-color: var(--teal);
-            color: white;
-        }
-        
-        .custom-week {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 16px;
-        }
-        
-        .custom-week input {
-            background: var(--input-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px 16px;
-            width: 100px;
-            color: var(--text);
-            font-size: 1rem;
-            text-align: center;
-        }
-        
-        .custom-week button {
-            background: var(--card2);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px 24px;
-            color: var(--text2);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .custom-week button:hover {
-            border-color: var(--teal);
-            color: var(--teal);
-        }
-        
-        /* Currency Selector */
-        .currency-selector {
-            margin-bottom: 40px;
-        }
-        
-        .currency-buttons {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        
-        .currency-btn {
-            flex: 1;
-            min-width: 120px;
-            background: var(--input-bg);
-            border: 2px solid var(--border);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .currency-btn.active {
-            border-color: var(--teal);
-            background: linear-gradient(135deg, rgba(0,168,200,0.1), rgba(0,168,200,0.05));
-        }
-        
-        .currency-symbol {
-            font-size: 2rem;
-            font-weight: 700;
-            display: block;
-            margin-bottom: 8px;
-        }
-        
-        .currency-name {
-            font-size: 0.9rem;
-            color: var(--muted);
-        }
-        
-        .currency-rate {
-            font-size: 0.7rem;
-            color: var(--teal);
-            margin-top: 8px;
-        }
-        
-        /* Price Display */
-        .price-display {
-            background: linear-gradient(135deg, var(--card2), var(--card));
-            border-radius: 24px;
-            padding: 32px;
-            text-align: center;
-            margin-bottom: 32px;
-            border: 1px solid var(--border);
-        }
-        
-        .price-label {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
-            color: var(--muted);
-            margin-bottom: 8px;
-        }
-        
-        .price-amount {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 4rem;
-            color: var(--orange);
-            line-height: 1;
-        }
-        
-        .price-amount small {
-            font-size: 1rem;
-            color: var(--muted);
-        }
-        
-        .price-breakdown {
-            font-size: 0.85rem;
-            color: var(--muted);
-            margin-top: 12px;
-        }
-        
-        .price-conversion {
-            font-size: 0.75rem;
-            color: var(--teal);
-            margin-top: 8px;
-        }
-        
-        /* Payment Options */
-        .payment-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 32px;
-        }
-        
-        .payment-option {
-            background: var(--input-bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 24px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .payment-option:hover {
-            border-color: var(--teal);
-        }
-        
-        .payment-option.selected {
-            border-color: var(--teal);
-            background: linear-gradient(135deg, rgba(0,168,200,0.1), rgba(0,168,200,0.05));
-        }
-        
-        .payment-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--text);
-            margin-bottom: 8px;
-        }
-        
-        .payment-desc {
-            font-size: 0.8rem;
-            color: var(--muted);
-        }
-        
-        .payment-amount {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--orange);
-            margin-top: 12px;
-        }
-        
-        /* Pay Button */
-        .pay-button {
-            width: 100%;
-            background: linear-gradient(135deg, var(--teal), var(--teal-dark));
-            border: none;
-            border-radius: 60px;
-            padding: 20px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: white;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-        
-        .pay-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0,168,200,0.3);
-        }
-        
-        .pay-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        /* Info Cards */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-top: 40px;
-        }
-        
-        .info-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 24px;
-            text-align: center;
-        }
-        
-        .info-icon {
-            font-size: 2rem;
-            margin-bottom: 16px;
-        }
-        
-        .info-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.2rem;
-            color: var(--text);
-            margin-bottom: 8px;
-        }
-        
-        .info-text {
-            font-size: 0.85rem;
-            color: var(--muted);
-            line-height: 1.6;
-        }
-        
-        /* Loading Spinner */
-        .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 0.8s linear infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Responsive */
-        @media (max-width: 900px) {
-            nav { padding: 0 24px; }
-            .nav-links { display: none; }
-            .hamburger { display: flex; }
-            .sec { padding: 40px 24px; }
-            .calculator-card { padding: 24px; }
-            .payment-options { grid-template-columns: 1fr; }
-            .info-grid { grid-template-columns: 1fr; }
-            .week-buttons { justify-content: center; }
-            .rate-banner { flex-direction: column; text-align: center; }
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--bg);
-            padding: 48px 60px 32px;
-            margin-top: 60px;
-        }
-        
-        .footer-bottom {
-            border-top: 1px solid var(--border2);
-            padding-top: 24px;
-            text-align: center;
-        }
-        
-        .footer-copy {
-            font-size: 0.75rem;
-            color: var(--muted);
-        }
-        
-        .wa-fab {
-            position: fixed;
-            bottom: 28px;
-            right: 28px;
-            width: 58px;
-            height: 58px;
-            background: #25D366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            box-shadow: 0 4px 24px rgba(37,211,102,.45);
-            z-index: 999;
-            transition: transform 0.2s;
-        }
-        
-        .wa-fab:hover { transform: scale(1.12); }
-        .wa-fab svg { width: 30px; height: 30px; fill: #fff; }
-    </style>
-</head>
-<body>
-
-<nav>
-    <div class="nav-logo">
-        <a href="index.html">
-            <img src="images/logo.jpg" width="40" height="40" style="height:40px;width:40px;border-radius:50%;object-fit:cover;border:2px solid var(--teal);" alt="SVFA Logo">
-            Sacred Vision <span>FC</span>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing & Registration — Sacred Vision Football Academy</title>
+    <meta name="description" content="Programme durations, daily rates, and secure online payment for the SVFA Summer Camp 2026. Local and international rates available. Pay via Paystack." />
+    <meta name="keywords" content="football camp Ghana, soccer academy Ghana, SVFA, Sacred Vision Football Academy, summer camp 2026, Winneba, Central Region Ghana, youth football, GFA registered" />
+    <meta name="author" content="Sacred Vision Football Academy" />
+    <meta name="theme-color" content="#07100F" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Pricing & Registration — Sacred Vision Football Academy" />
+    <meta property="og:description" content="Programme durations, daily rates, and secure online payment for the SVFA Summer Camp 2026. Local and international rates available. Pay via Paystack." />
+    <meta property="og:image" content="https://www.sacredvisionfootball.com/images/og-share.jpg" />
+    <meta property="og:url" content="https://www.sacredvisionfootball.com/pricing" />
+    <meta property="og:site_name" content="Sacred Vision Football Academy" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Pricing & Registration — Sacred Vision Football Academy" />
+    <meta name="twitter:description" content="Programme durations, daily rates, and secure online payment for the SVFA Summer Camp 2026. Local and international rates available. Pay via Paystack." />
+    <meta name="twitter:image" content="https://www.sacredvisionfootball.com/images/og-share.jpg" />
+    <link rel="canonical" href="https://www.sacredvisionfootball.com/pricing" />
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.min.css?v=1.0" />
+    <!-- Google Analytics — deferred until cookie consent -->
+    <script>
+      (function(){
+        if(localStorage.getItem('cookie-consent')==='accepted'){
+          var s=document.createElement('script');
+          s.async=true;
+          s.src='https://www.googletagmanager.com/gtag/js?id=G-C66WVX6787';
+          document.head.appendChild(s);
+          window.dataLayer=window.dataLayer||[];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js',new Date());
+          gtag('config','G-C66WVX6787');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-nav">Skip to content</a>
+    <nav>
+      <div class="nav-logo">
+        <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;">
+        <img src="images/logo.jpg" width="40" height="40" style="height:40px;width:40px;border-radius:50%;object-fit:cover;border:2px solid var(--teal);" alt="SVFA Logo" />Sacred Vision <span>FC</span>
         </a>
-    </div>
-    <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
         <li><a href="programme.html">Programme</a></li>
-        <li><a href="pricing.html">Pricing</a></li>
-        <li><a href="payment.html" class="active">Pay Now</a></li>
+        <li><a href="coaches.html">Coaches</a></li>
+        <li><a href="coaches.html#vacancies">Vacancies</a></li>
+        <li><a href="pricing.html" class="active">Pricing</a></li>
+        <li><a href="gallery.html">Instagram</a></li>
+        <li><a href="blog.html">Blog</a></li>
         <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-    <div class="nav-right">
-        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
-        <button class="theme-toggle" id="themeToggle">🌙</button>
-        <a href="#" class="nav-cta" onclick="document.getElementById('registerModal').classList.add('active'); return false;">Register</a>
+      </ul>
+      <div class="nav-right">
+        <a href="https://wa.me/233247012493" class="nav-wa" target="_blank" rel="noopener" title="Chat on WhatsApp">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          +233 24 701 2493
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        <button class="theme-toggle" id="themeToggle" title="Toggle light/dark mode" aria-label="Toggle light/dark mode"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+        <a href="#pricing" class="nav-cta" onclick="event.preventDefault(); document.getElementById('registerModal').classList.add('active');">Register Now</a>
+      </div>
+    </nav>
+
+    <main id="main-content">
+    <!-- PRICING -->
+    <div class="urgency-banner">
+      Summer 2026 — Registration Open
     </div>
-</nav>
+    <section class="sec" id="pricing">
+      <p class="tag reveal">Pricing</p>
+      <h1 class="reveal reveal-d1">
+        Programme Durations & Pricing
+      </h1>
+      <p class="intro reveal reveal-d2">
+        Book in 7-day blocks — minimum stay is 1 week. Train 6 days a week
+        with professional coaching, full board, and everything included.
+        Local and international rates available.
+      </p>
 
-<main>
-    <section class="sec">
-        <p class="tag">Flexible Payment</p>
-        <h1>Build Your <span class="g">Custom</span> <span class="y">Plan</span></h1>
-        <p class="intro">Choose your duration and view prices in GHS, USD, EUR, or GBP. All payments processed securely in GHS via Paystack with live exchange rates.</p>
-
-        <!-- Main Calculator Card -->
-        <div class="calculator-card">
-            <div class="calc-header">
-                <div class="calc-icon">💰</div>
-                <h2>Payment Calculator</h2>
-            </div>
-
-            <!-- Exchange Rate Banner -->
-            <div class="rate-banner" id="rateBanner">
-                <p>📊 <strong>Live Exchange Rates</strong> — Powered by ExchangeRate-API</p>
-                <div>
-                    <span class="update-time" id="updateTime">Updating...</span>
-                    <button class="refresh-rates" onclick="refreshExchangeRates()">⟳ Refresh Rates</button>
-                </div>
-            </div>
-
-            <!-- Week Selector -->
-            <div class="week-selector">
-                <span class="week-label">SELECT DURATION (MINIMUM 1 WEEK)</span>
-                <div class="week-buttons" id="weekButtons">
-                    <button class="week-btn" data-weeks="1">1 Week</button>
-                    <button class="week-btn" data-weeks="2">2 Weeks</button>
-                    <button class="week-btn" data-weeks="3">3 Weeks</button>
-                    <button class="week-btn" data-weeks="4">4 Weeks</button>
-                    <button class="week-btn" data-weeks="6">6 Weeks</button>
-                    <button class="week-btn" data-weeks="8">8 Weeks</button>
-                    <button class="week-btn" data-weeks="10">10 Weeks</button>
-                    <button class="week-btn active" data-weeks="12">12 Weeks (Full Camp)</button>
-                </div>
-                <div class="custom-week">
-                    <input type="number" id="customWeeks" min="1" max="12" placeholder="Weeks">
-                    <button onclick="setCustomWeeks()">Apply</button>
-                </div>
-            </div>
-
-            <!-- Currency Selector -->
-            <div class="currency-selector">
-                <span class="week-label">VIEW IN YOUR CURRENCY</span>
-                <div class="currency-buttons" id="currencyButtons">
-                    <div class="currency-btn active" data-currency="GHS">
-                        <span class="currency-symbol">₵</span>
-                        <span class="currency-name">Ghana Cedi</span>
-                        <span class="currency-rate" id="rateGHS">Base Currency</span>
-                    </div>
-                    <div class="currency-btn" data-currency="USD">
-                        <span class="currency-symbol">$</span>
-                        <span class="currency-name">US Dollar</span>
-                        <span class="currency-rate" id="rateUSD">Loading...</span>
-                    </div>
-                    <div class="currency-btn" data-currency="EUR">
-                        <span class="currency-symbol">€</span>
-                        <span class="currency-name">Euro</span>
-                        <span class="currency-rate" id="rateEUR">Loading...</span>
-                    </div>
-                    <div class="currency-btn" data-currency="GBP">
-                        <span class="currency-symbol">£</span>
-                        <span class="currency-name">British Pound</span>
-                        <span class="currency-rate" id="rateGBP">Loading...</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Price Display -->
-            <div class="price-display">
-                <div class="price-label">TOTAL AMOUNT</div>
-                <div class="price-amount" id="totalAmount">₵ 33,600</div>
-                <div class="price-breakdown" id="priceBreakdown">12 weeks × ₵400/day × 7 days/week</div>
-                <div class="price-conversion" id="priceConversion"></div>
-            </div>
-
-            <!-- Payment Options -->
-            <div class="payment-options">
-                <div class="payment-option selected" data-payment-type="deposit">
-                    <div class="payment-title">💳 Pay Deposit (50%)</div>
-                    <div class="payment-desc">Secure your spot with 50% deposit. Balance due before arrival.</div>
-                    <div class="payment-amount" id="depositAmount">₵ 16,800</div>
-                </div>
-                <div class="payment-option" data-payment-type="full">
-                    <div class="payment-title">✅ Pay in Full</div>
-                    <div class="payment-desc">Pay the total amount now and complete your registration.</div>
-                    <div class="payment-amount" id="fullAmount">₵ 33,600</div>
-                </div>
-            </div>
-
-            <!-- Pay Button -->
-            <button class="pay-button" id="payButton">
-                <span>💳</span> Pay with Paystack (GHS)
-            </button>
-
-            <p style="text-align: center; margin-top: 20px; font-size: 0.75rem; color: var(--muted);">
-                🔒 Secure payment powered by Paystack. All major cards, mobile money, and bank transfers accepted. Your card will be charged in GHS at the current exchange rate.
-            </p>
+      <!-- HOW IT WORKS -->
+      <div class="duration-grid">
+        <div class="price-card reveal">
+          <div class="price-flag"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <div class="price-title">1 Week</div>
+          <div class="price-who">
+            Intensive introduction — ideal for first-timers
+          </div>
+          <div class="price-rate-label">Duration</div>
+          <div class="price-rate" style="font-size: 2.2rem">7 Days</div>
+          <div class="price-per">6 training days + 1 rest day</div>
+          <ul class="price-list">
+            <li>Full daily training (6 days/week)</li>
+            <li>Gym & strength sessions</li>
+            <li>Swimming & recovery</li>
+            <li>1 friendly match</li>
+            <li>Player assessment report</li>
+            <li>Completion certificate</li>
+          </ul>
         </div>
-
-        <!-- Information Cards -->
-        <div class="info-grid">
-            <div class="info-card">
-                <div class="info-icon">🏠</div>
-                <div class="info-title">Accommodation Included</div>
-                <div class="info-text">International rates include standard accommodation with AC, TV, and private washroom.</div>
-            </div>
-            <div class="info-card">
-                <div class="info-icon">🍽️</div>
-                <div class="info-title">Full Board Meals</div>
-                <div class="info-text">Three authentic Ghanaian meals daily. Special dietary requirements accommodated.</div>
-            </div>
-            <div class="info-card">
-                <div class="info-icon">🔄</div>
-                <div class="info-title">Flexible Dates</div>
-                <div class="info-text">Start any Monday between June 15 - August 30. Add weeks anytime.</div>
-            </div>
+        <div class="price-card featured reveal reveal-d1">
+          <div class="price-badge">Popular</div>
+          <div class="price-flag"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22c4.97 0 9-3.58 9-8 0-5-4-8-4-12 0 0-2 2-4 2s-4-2-4-2c0 4-4 7-4 12 0 4.42 4.03 8 9 8z"/><path d="M12 22c2.21 0 4-1.79 4-4 0-2-1.5-3-1.5-5 0 0-.75.75-1.5.75S11.5 13 11.5 13c0 2-1.5 3-1.5 5 0 2.21 1.79 4 4 4z"/></svg></div>
+          <div class="price-title">2–4 Weeks</div>
+          <div class="price-who">
+            Deep development — the most popular choice
+          </div>
+          <div class="price-rate-label">Duration</div>
+          <div class="price-rate" style="font-size: 2.2rem">14–28 Days</div>
+          <div class="price-per">Book in 7-day blocks · choose your length</div>
+          <ul class="price-list">
+            <li>Full daily training (6 days/week)</li>
+            <li>Gym & strength sessions</li>
+            <li>Swimming & recovery</li>
+            <li>Multiple friendly matches</li>
+            <li>Professional mentorship sessions</li>
+            <li>Talent evaluation & scouting report</li>
+            <li>Player assessment report</li>
+            <li>Completion certificate</li>
+          </ul>
         </div>
+        <div class="price-card reveal reveal-d2">
+          <div class="price-flag"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 21h8M12 17v4M6 3h12v4a6 6 0 0 1-12 0V3z"/><path d="M6 5H4a1 1 0 0 0-1 1v1a4 4 0 0 0 4 4h0M18 5h2a1 1 0 0 1 1 1v1a4 4 0 0 1-4 4h0"/></svg></div>
+          <div class="price-title">Full Season</div>
+          <div class="price-who">Full immersion — maximum development</div>
+          <div class="price-rate-label">Duration</div>
+          <div class="price-rate" style="font-size: 2.2rem">11 Weeks</div>
+          <div class="price-per">
+            June 15 – Aug 30 · the complete experience
+          </div>
+          <ul class="price-list">
+            <li>Full daily training (6 days/week)</li>
+            <li>Gym & strength sessions</li>
+            <li>Swimming & recovery</li>
+            <li>12+ friendly matches</li>
+            <li>Weekly professional mentorship</li>
+            <li>Comprehensive talent evaluation</li>
+            <li>Player assessment report</li>
+            <li>Completion certificate</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- RATE CARDS -->
+      <p class="tag reveal">Rates</p>
+      <h3
+        class="reveal reveal-d1"
+        style="
+          font-family: &quot;Bebas Neue&quot;, sans-serif;
+          font-size: 1.6rem;
+          letter-spacing: 0.05em;
+          color: var(--text);
+          margin-top: 12px;
+          margin-bottom: 24px;
+        "
+      >
+        Daily Rate — All Programmes
+      </h3>
+      <div class="pricing-wrap">
+        <div class="price-card">
+          <div class="price-flag"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6l1.5 3 3.5.5-2.5 2.5.5 3.5L12 14l-3 1.5.5-3.5L7 9.5l3.5-.5z"/></svg></div>
+          <div class="price-title">Local Rate</div>
+          <div class="price-who">For families based in Ghana</div>
+          <div class="price-rate-label">Daily Rate</div>
+          <div class="price-rate">GHS 400</div>
+          <div class="price-per">
+            per day · minimum 7 days · book in weekly blocks
+          </div>
+          <ul class="price-list">
+            <li>All training, gym & swimming sessions</li>
+            <li>Full board — 3 meals per day</li>
+            <li>Camp kit (jersey, shirt + shorts)</li>
+            <li>Friendly matches & talent evaluation</li>
+            <li>Professional mentorship</li>
+            <li>Player assessment report</li>
+            <li>Completion certificate</li>
+            <li>Transport from meeting point to camp</li>
+            <li>Local transportation during camp</li>
+            <li>Cultural sightseeing activities</li>
+            <li>Medical & safety support</li>
+            <li class="no">Accommodation (enquire for rates)</li>
+          </ul>
+        </div>
+        <div class="price-card featured">
+          <div class="price-badge">International</div>
+          <div class="price-flag"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></div>
+          <div class="price-title">International Rate</div>
+          <div class="price-who">For diaspora & international families</div>
+          <div class="price-rate-label">Daily Rate</div>
+          <div class="price-rate">$85</div>
+          <div class="price-per">
+            per day · minimum 7 days · book in weekly blocks
+          </div>
+          <ul class="price-list">
+            <li>All training, gym & swimming sessions</li>
+            <li>Full board — 3 meals per day</li>
+            <li>Camp kit (jersey, shirt + shorts)</li>
+            <li>Friendly matches & talent evaluation</li>
+            <li>Professional mentorship</li>
+            <li>Player assessment report</li>
+            <li>Completion certificate</li>
+            <li>Visa invitation letter</li>
+            <li>Accommodation (standard room)</li>
+            <li>Airport pickup on arrival & drop-off on departure</li>
+            <li>Local transportation during camp</li>
+            <li>Cultural sightseeing activities</li>
+            <li>Medical & safety support</li>
+          </ul>
+        </div>
+      </div>
+      <!-- FACILITIES -->
+      <p class="tag reveal">Facilities</p>
+      <h3 class="reveal reveal-d1" style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.05em;color:var(--text);margin-top:12px;margin-bottom:24px;">
+        Training Pitch & Accommodation
+      </h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:40px;">
+        <div class="reveal" style="border-radius:20px;overflow:hidden;border:1px solid var(--border);background:var(--card);">
+          <picture>
+            <source srcset="images/pitch.webp" type="image/webp" />
+            <img src="images/pitch.jpg" alt="Astro turf football pitch at Perez University, Winneba" loading="lazy" style="width:100%;height:220px;object-fit:cover;" />
+          </picture>
+          <div style="padding:20px;">
+            <h4 style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.04em;margin-bottom:6px;">Astro Turf Pitch</h4>
+            <p style="font-size:0.85rem;color:var(--muted);line-height:1.5;">Professional-grade artificial turf for daily training sessions, tactical drills, and competitive matches.</p>
+          </div>
+        </div>
+        <div class="reveal reveal-d1" style="border-radius:20px;overflow:hidden;border:1px solid var(--border);background:var(--card);">
+          <picture>
+            <source srcset="images/accommodation.webp" type="image/webp" />
+            <img src="images/accommodation.jpg" alt="On-campus accommodation building at Perez University, Winneba" loading="lazy" style="width:100%;height:220px;object-fit:cover;" />
+          </picture>
+          <div style="padding:20px;">
+            <h4 style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.04em;margin-bottom:6px;">Accommodation Building</h4>
+            <p style="font-size:0.85rem;color:var(--muted);line-height:1.5;">Modern two-storey on-campus housing at Perez University, Winneba. Included for international players; available for local players on request.</p>
+          </div>
+        </div>
+        <div class="reveal reveal-d2" style="border-radius:20px;overflow:hidden;border:1px solid var(--border);background:var(--card);">
+          <picture>
+            <source srcset="images/indoor.webp" type="image/webp" />
+            <img src="images/indoor.jpg" alt="Indoor room with bunk beds, wardrobe, desk and ceiling fan" loading="lazy" style="width:100%;height:220px;object-fit:cover;" />
+          </picture>
+          <div style="padding:20px;">
+            <h4 style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.04em;margin-bottom:6px;">Room Interior</h4>
+            <p style="font-size:0.85rem;color:var(--muted);line-height:1.5;">Clean, furnished rooms with bunk beds, wardrobe, desk, and ceiling fan. Secure and comfortable for the duration of camp.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAYMENT METHODS -->
+      <p class="tag reveal">Payment</p>
+      <h3 class="reveal reveal-d1" style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.05em;color:var(--text);margin-top:12px;margin-bottom:24px;">
+        How to Pay
+      </h3>
+      <div style="background:var(--card);border-radius:20px;padding:32px;border:1px solid var(--border);margin-bottom:32px;box-shadow:0 8px 30px rgba(0,0,0,0.12);">
+        <p style="font-size:0.9rem;color:var(--text2);line-height:1.6;margin-bottom:24px;">
+          A <strong style="color:var(--orange)">50% deposit</strong> confirms your place. Balance is due before your start date. Choose your payment method below:
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:24px;">
+          <!-- LOCAL PAYMENT -->
+          <div style="background:var(--input-bg);border:1px solid var(--border);border-radius:20px;padding:28px 24px;text-align:center;">
+            <div style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:14px;background:rgba(108,228,210,0.1);margin-bottom:14px;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6l1.5 3 3.5.5-2.5 2.5.5 3.5L12 14l-3 1.5.5-3.5L7 9.5l3.5-.5z"/></svg>
+            </div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--teal);margin-bottom:4px;">Local Payment</div>
+            <div style="font-size:0.8rem;color:var(--muted);margin-bottom:6px;">For families based in Ghana</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--orange);margin:12px 0 4px;">GHS 400<span style="font-size:0.9rem;color:var(--muted);font-family:'Outfit',sans-serif;font-weight:400;">/day</span></div>
+            <div style="font-size:0.7rem;color:var(--muted);margin-bottom:16px;">Card · Mobile Money · Bank Transfer</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:16px;">
+              <span style="background:rgba(108,228,210,0.1);border:1px solid rgba(108,228,210,0.2);border-radius:6px;padding:3px 8px;font-size:0.65rem;color:var(--teal);">MTN MoMo</span>
+              <span style="background:rgba(108,228,210,0.1);border:1px solid rgba(108,228,210,0.2);border-radius:6px;padding:3px 8px;font-size:0.65rem;color:var(--teal);">Visa</span>
+              <span style="background:rgba(108,228,210,0.1);border:1px solid rgba(108,228,210,0.2);border-radius:6px;padding:3px 8px;font-size:0.65rem;color:var(--teal);">Mastercard</span>
+            </div>
+            <button onclick="openPaystackPayment()" style="background:var(--teal);color:#07100f;border:none;padding:12px 32px;border-radius:100px;cursor:pointer;font-weight:700;font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;font-family:'Outfit',sans-serif;width:100%;transition:transform 0.15s,box-shadow 0.15s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 16px rgba(108,228,210,0.3)'" onmouseout="this.style.transform='';this.style.boxShadow=''">Pay with Paystack</button>
+            <div style="margin-top:10px;font-size:0.65rem;color:var(--muted);">Powered by Paystack · Secured with SSL</div>
+          </div>
+          <!-- INTERNATIONAL PAYMENT -->
+          <div style="background:var(--input-bg);border:2px solid var(--orange);border-radius:20px;padding:28px 24px;text-align:center;position:relative;">
+            <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--orange);color:#07100f;padding:4px 16px;border-radius:100px;font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-family:'Outfit',sans-serif;">Recommended</div>
+            <div style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:14px;background:rgba(255,165,0,0.1);margin-bottom:14px;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.5"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+            </div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--orange);margin-bottom:4px;">International Payment</div>
+            <div style="font-size:0.8rem;color:var(--muted);margin-bottom:6px;">For diaspora &amp; international families</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--orange);margin:12px 0 4px;">$85<span style="font-size:0.9rem;color:var(--muted);font-family:'Outfit',sans-serif;font-weight:400;">/day</span></div>
+            <div style="font-size:0.7rem;color:var(--muted);margin-bottom:16px;">Card · Apple Pay · Google Pay · Bank Transfer</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:16px;flex-wrap:wrap;">
+              <span style="background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.2);border-radius:6px;padding:3px 8px;font-size:0.65rem;color:var(--orange);">Visa</span>
+              <span style="background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.2);border-radius:6px;padding:3px 8px;font-size:0.65rem;color:var(--orange);">Mastercard</span>
+              <span style="background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.2);border-radius:6px;padding:3px 8px;font-size:0.65rem;color:var(--orange);">Apple Pay</span>
+              <span style="background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.2);border-radius:6px;padding:3px 8px;font-size:0.65rem;color:var(--orange);">USD · GBP · EUR</span>
+            </div>
+            <button onclick="openInternationalPayment()" style="background:var(--orange);color:#07100f;border:none;padding:12px 32px;border-radius:100px;cursor:pointer;font-weight:700;font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;font-family:'Outfit',sans-serif;width:100%;transition:transform 0.15s,box-shadow 0.15s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 16px rgba(255,165,0,0.3)'" onmouseout="this.style.transform='';this.style.boxShadow=''">Pay Now</button>
+            <div style="margin-top:10px;font-size:0.65rem;color:var(--muted);">Powered by Paystack · Secured with SSL</div>
+          </div>
+        </div>
+        <p style="font-size:0.8rem;color:var(--muted);text-align:center;">
+          Both payment methods are secure and PCI-compliant. Need help? Contact us on
+          <a href="https://wa.me/233247012493" style="color:var(--teal);">WhatsApp</a> or
+          <a href="mailto:info@sacredvisionfootballclub.com" style="color:var(--teal);">email</a>.
+        </p>
+      </div>
+
+      <!-- OLD PAYMENT SECTION REMOVED -->
+      <!-- TRANSPORT INFO -->
+      <p class="tag reveal">Transport</p>
+      <h3 class="reveal reveal-d1" style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.05em;color:var(--text);margin-top:12px;margin-bottom:24px;">
+        Getting to Camp
+      </h3>
+      <div class="pricing-wrap">
+        <div class="price-card reveal">
+          <div class="price-flag"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 17h2m10 0h2M2 9h20M5 13h4m6 0h4"/><rect x="2" y="5" width="20" height="14" rx="3"/></svg></div>
+          <div class="price-title">Local Players</div>
+          <div class="price-who">Based in Ghana</div>
+          <div class="price-rate" style="font-size:1.4rem;margin-top:12px;">Meeting Point Pickup</div>
+          <div class="price-per">Players are collected from a designated meeting point and transported to camp. Details provided upon registration.</div>
+        </div>
+        <div class="price-card featured reveal reveal-d1">
+          <div class="price-badge">International</div>
+          <div class="price-flag"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></div>
+          <div class="price-title">International Players</div>
+          <div class="price-who">Diaspora & overseas families</div>
+          <div class="price-rate" style="font-size:1.4rem;margin-top:12px;">Airport Pickup & Drop-off</div>
+          <div class="price-per">Picked up from the airport upon arrival and dropped off upon departure. Included in your international rate.</div>
+        </div>
+      </div>
+
     </section>
-</main>
 
-<footer>
-    <div class="footer-bottom">
-        <p class="footer-copy">© 2026 Sacred Vision Football Academy. All rights reserved.</p>
+    <div class="stripe"></div>
+
+    <!-- REGISTRATION FORM -->
+    <div class="sec-bg" id="register">
+      <div class="sec">
+        <p class="tag reveal">Register</p>
+        <h2 class="reveal reveal-d1">
+          Register Your Interest
+        </h2>
+        <p class="intro reveal reveal-d2">
+          Fill out the form below and our team will contact you within 24 hours
+          to confirm your dates, answer questions, and send your deposit link.
+        </p>
+        <div style="max-width: 680px">
+          <form
+            class="reg-form reveal reveal-d2"
+            id="regForm"
+            onsubmit="return false;"
+          >
+            <input
+              type="text"
+              name="full_name"
+              class="reg-input"
+              placeholder="Full Name *"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              class="reg-input"
+              placeholder="Email Address *"
+              required
+            />
+            <input
+              type="tel"
+              name="phone"
+              class="reg-input"
+              placeholder="Phone / WhatsApp Number *"
+              required
+            />
+            <input
+              type="number"
+              name="age"
+              class="reg-input"
+              placeholder="Age"
+              min="15"
+              max="25"
+            />
+            <input type="text" name="nationality" class="reg-input" placeholder="Nationality" />
+            <select name="weeks" class="reg-input" required>
+              <option value="" disabled selected>Number of Weeks *</option>
+              <option value="1-week">1 Week (7 days)</option>
+              <option value="2-weeks">2 Weeks (14 days)</option>
+              <option value="3-weeks">3 Weeks (21 days)</option>
+              <option value="4-weeks">4 Weeks (28 days)</option>
+              <option value="5-weeks">5 Weeks (35 days)</option>
+              <option value="6-weeks">6 Weeks (42 days)</option>
+              <option value="7-weeks">7 Weeks (49 days)</option>
+              <option value="8-weeks">8 Weeks (56 days)</option>
+              <option value="full-season">Full Season (11 weeks)</option>
+            </select>
+            <input
+              type="text"
+              name="start_date"
+              class="reg-input"
+              placeholder="Preferred Start Date (any Monday)"
+            />
+            <select name="rate_type" class="reg-input" required>
+              <option value="" disabled selected>Rate Type *</option>
+              <option value="local">Local Rate</option>
+              <option value="international">International Rate</option>
+            </select>
+            <textarea
+              class="reg-input full"
+              name="notes"
+              rows="3"
+              placeholder="Anything else you'd like us to know? (playing position, special requirements, etc.)"
+            ></textarea>
+            <div class="full">
+              <button type="submit" class="reg-submit" id="regSubmit">
+                Submit Registration Interest
+              </button>
+              <p class="reg-note">
+                This form registers your interest — it is not a final booking.
+                Our team will contact you to confirm availability, answer
+                questions, and arrange payment. You can also register directly
+                via
+                <a
+                  href="https://wa.me/233247012493"
+                  target="_blank"
+                  rel="noopener"
+                  style="color: var(--teal)"
+                  >WhatsApp</a
+                >
+                or
+                <a
+                  href="mailto:info@sacredvisionfootballclub.com"
+                  style="color: var(--teal)"
+                  >email</a
+                >.
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-</footer>
 
-<a href="https://wa.me/233244997316" class="wa-fab" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    // Constants
-    const DAILY_RATE_GHS = 400;
-    const DAYS_PER_WEEK = 7;
-    const API_KEY = '7e419b8865ac77ed33b24d34'; // Get free key from exchangerate-api.com
-    const PAYSTACK_PUBLIC_KEY = 'pk_live_48038ace40f586d6bf965659ced32e50ad36d470'; // Replace with your actual key
-    
-    // State
-    let currentWeeks = 12;
-    let currentDisplayCurrency = 'GHS';
-    let currentPaymentType = 'deposit';
-    let exchangeRates = {
-        USD: 0,
-        EUR: 0,
-        GBP: 0,
-        lastUpdated: null
-    };
-    let isLoadingRates = false;
-    
-    // Fetch live exchange rates from ExchangeRate-API
-    async function fetchExchangeRates() {
-        if (isLoadingRates) return;
-        isLoadingRates = true;
-        
-        // Show loading state
-        document.getElementById('rateUSD').innerHTML = '<span class="spinner" style="width:12px;height:12px;"></span>';
-        document.getElementById('rateEUR').innerHTML = '<span class="spinner" style="width:12px;height:12px;"></span>';
-        document.getElementById('rateGBP').innerHTML = '<span class="spinner" style="width:12px;height:12px;"></span>';
-        
-        try {
-            // Using free ExchangeRate-API (sign up at exchangerate-api.com for free key)
-            const response = await fetch(`https://api.exchangerate-api.com/v4/latest/GHS`);
-            const data = await response.json();
-            
-            exchangeRates = {
-                USD: data.rates.USD || 0.0645,
-                EUR: data.rates.EUR || 0.0595,
-                GBP: data.rates.GBP || 0.052,
-                lastUpdated: new Date()
-            };
-            
-            // Update rate displays
-            document.getElementById('rateUSD').innerHTML = `1 GHS ≈ $${exchangeRates.USD.toFixed(4)}`;
-            document.getElementById('rateEUR').innerHTML = `1 GHS ≈ €${exchangeRates.EUR.toFixed(4)}`;
-            document.getElementById('rateGBP').innerHTML = `1 GHS ≈ £${exchangeRates.GBP.toFixed(4)}`;
-            document.getElementById('updateTime').innerHTML = `Updated: ${exchangeRates.lastUpdated.toLocaleTimeString()}`;
-            
-            // Save to localStorage for offline fallback
-            localStorage.setItem('svfa_exchange_rates', JSON.stringify(exchangeRates));
-            
-        } catch (error) {
-            console.error('Failed to fetch exchange rates:', error);
-            
-            // Fallback to cached rates or default
-            const cached = localStorage.getItem('svfa_exchange_rates');
-            if (cached) {
-                const cachedRates = JSON.parse(cached);
-                exchangeRates = cachedRates;
-                document.getElementById('rateUSD').innerHTML = `1 GHS ≈ $${exchangeRates.USD.toFixed(4)} (cached)`;
-                document.getElementById('rateEUR').innerHTML = `1 GHS ≈ €${exchangeRates.EUR.toFixed(4)} (cached)`;
-                document.getElementById('rateGBP').innerHTML = `1 GHS ≈ £${exchangeRates.GBP.toFixed(4)} (cached)`;
-            } else {
-                // Default fallback rates
-                exchangeRates = {
-                    USD: 0.0645,
-                    EUR: 0.0595,
-                    GBP: 0.052,
-                    lastUpdated: new Date()
-                };
-                document.getElementById('rateUSD').innerHTML = `1 GHS ≈ $0.0645`;
-                document.getElementById('rateEUR').innerHTML = `1 GHS ≈ €0.0595`;
-                document.getElementById('rateGBP').innerHTML = `1 GHS ≈ £0.052`;
-            }
-        } finally {
-            isLoadingRates = false;
-            updateDisplay();
-        }
-    }
-    
-    // Refresh rates manually
-    function refreshExchangeRates() {
-        fetchExchangeRates();
-        Swal.fire({
-            title: 'Refreshing Rates',
-            text: 'Fetching latest exchange rates...',
-            icon: 'info',
-            toast: true,
-            timer: 1500,
-            showConfirmButton: false
-        });
-    }
-    
-    // Convert GHS to display currency
-    function convertToDisplayCurrency(amountGHS) {
-        if (currentDisplayCurrency === 'GHS') return amountGHS;
-        const rate = exchangeRates[currentDisplayCurrency];
-        return amountGHS * rate;
-    }
-    
-    // Format currency for display
-    function formatCurrency(amount, currency) {
-        const symbols = {
-            GHS: '₵',
-            USD: '$',
-            EUR: '€',
-            GBP: '£'
-        };
-        const formatted = amount.toLocaleString(undefined, { 
-            minimumFractionDigits: 2, 
-            maximumFractionDigits: 2 
-        });
-        return `${symbols[currency]} ${formatted}`;
-    }
-    
-    // Calculate total in GHS
-    function calculateTotalGHS() {
-        return currentWeeks * DAYS_PER_WEEK * DAILY_RATE_GHS;
-    }
-    
-    // Calculate total in display currency
-    function calculateTotalDisplay() {
-        const totalGHS = calculateTotalGHS();
-        return convertToDisplayCurrency(totalGHS);
-    }
-    
-    // Calculate deposit in display currency
-    function calculateDepositDisplay() {
-        const totalGHS = calculateTotalGHS();
-        const depositGHS = totalGHS * 0.5;
-        return convertToDisplayCurrency(depositGHS);
-    }
-    
-    // Update all displays
-    function updateDisplay() {
-        const total = calculateTotalDisplay();
-        const deposit = calculateDepositDisplay();
-        const totalGHS = calculateTotalGHS();
-        
-        // Update total amount
-        document.getElementById('totalAmount').innerHTML = formatCurrency(total, currentDisplayCurrency);
-        
-        // Update breakdown
-        const breakdown = `${currentWeeks} week${currentWeeks > 1 ? 's' : ''} × ₵400/day × 7 days/week`;
-        document.getElementById('priceBreakdown').innerHTML = breakdown;
-        
-        // Update deposit and full amounts
-        document.getElementById('depositAmount').innerHTML = formatCurrency(deposit, currentDisplayCurrency);
-        document.getElementById('fullAmount').innerHTML = formatCurrency(total, currentDisplayCurrency);
-        
-        // Update conversion note
-        const conversionNote = document.getElementById('priceConversion');
-        if (currentDisplayCurrency !== 'GHS') {
-            const rate = exchangeRates[currentDisplayCurrency];
-            conversionNote.innerHTML = `💰 Actual charge in GHS: ₵ ${totalGHS.toLocaleString()} (${formatCurrency(total, currentDisplayCurrency)} at rate 1 GHS = ${currentDisplayCurrency} ${rate.toFixed(4)})`;
-        } else {
-            conversionNote.innerHTML = '';
-        }
-        
-        // Update button text
-        const payButton = document.getElementById('payButton');
-        const amountToPayGHS = currentPaymentType === 'deposit' ? totalGHS * 0.5 : totalGHS;
-        payButton.innerHTML = `<span>💳</span> Pay ₵ ${amountToPayGHS.toLocaleString()} via Paystack`;
-    }
-    
-    // Set custom weeks
-    function setCustomWeeks() {
-        const input = document.getElementById('customWeeks');
-        let weeks = parseInt(input.value);
-        if (isNaN(weeks) || weeks < 1) weeks = 1;
-        if (weeks > 12) weeks = 12;
-        
-        currentWeeks = weeks;
-        input.value = weeks;
-        
-        // Update active state on week buttons
-        document.querySelectorAll('.week-btn').forEach(btn => {
-            const btnWeeks = parseInt(btn.dataset.weeks);
-            if (btnWeeks === weeks) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
-        });
-        
-        updateDisplay();
-    }
-    
-    // Paystack payment function
-    function payWithPaystack() {
-        const totalGHS = calculateTotalGHS();
-        const amountToPayGHS = currentPaymentType === 'deposit' ? totalGHS * 0.5 : totalGHS;
-        
-        // Get customer email
-        Swal.fire({
-            title: 'Payment Details',
-            html: `
-                <div style="text-align:left;">
-                    <div style="margin-bottom:15px;">
-                        <label style="color:var(--teal);font-size:.8rem;display:block;margin-bottom:5px;">📧 Email Address *</label>
-                        <input type="email" id="pay-email" class="swal2-input" placeholder="your@email.com">
-                    </div>
-                    <div style="margin-bottom:15px;">
-                        <label style="color:var(--teal);font-size:.8rem;display:block;margin-bottom:5px;">👤 Full Name *</label>
-                        <input type="text" id="pay-name" class="swal2-input" placeholder="John Doe">
-                    </div>
-                    <div style="background:rgba(0,168,200,0.1);padding:15px;border-radius:10px;">
-                        <p style="margin:0 0 5px 0;"><strong>Payment Summary:</strong></p>
-                        <p style="margin:0;">Amount: <strong style="color:var(--orange);">₵ ${amountToPayGHS.toLocaleString()}</strong></p>
-                        <p style="margin:0;">Duration: ${currentWeeks} week${currentWeeks > 1 ? 's' : ''}</p>
-                        <p style="margin:0;">Type: ${currentPaymentType === 'deposit' ? '50% Deposit' : 'Full Payment'}</p>
-                        ${currentDisplayCurrency !== 'GHS' ? `<p style="margin-top:8px;font-size:0.8rem;">≈ ${formatCurrency(convertToDisplayCurrency(amountToPayGHS), currentDisplayCurrency)}</p>` : ''}
-                    </div>
-                </div>
-            `,
-            icon: 'info',
-            showCancelButton: true,
-            confirmButtonColor: '#00A8C8',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '💳 Proceed to Payment',
-            cancelButtonText: 'Cancel',
-            background: 'var(--card)',
-            color: 'var(--text2)',
-            preConfirm: () => {
-                const email = document.getElementById('pay-email').value;
-                const name = document.getElementById('pay-name').value;
-                
-                if (!email || !email.includes('@')) {
-                    Swal.showValidationMessage('Please enter a valid email');
-                    return false;
-                }
-                
-                if (!name) {
-                    Swal.showValidationMessage('Please enter your full name');
-                    return false;
-                }
-                
-                return { email, name };
-            }
-        }).then((result) => {
-            if (result.isConfirmed) {
-                const { email, name } = result.value;
-                
-                // Initialize Paystack payment
-                const handler = PaystackPop.setup({
-                    key: PAYSTACK_PUBLIC_KEY,
-                    email: email,
-                    amount: Math.round(amountToPayGHS * 100), // Convert to pesewas
-                    currency: 'GHS',
-                    ref: 'SVFA-' + Date.now() + '-' + Math.floor(Math.random() * 10000),
-                    metadata: {
-                        custom_fields: [
-                            {
-                                display_name: "Customer Name",
-                                variable_name: "customer_name",
-                                value: name
-                            },
-                            {
-                                display_name: "Duration",
-                                variable_name: "duration",
-                                value: `${currentWeeks} Weeks`
-                            },
-                            {
-                                display_name: "Payment Type",
-                                variable_name: "payment_type",
-                                value: currentPaymentType === 'deposit' ? 'Deposit (50%)' : 'Full Payment'
-                            },
-                            {
-                                display_name: "Display Currency",
-                                variable_name: "display_currency",
-                                value: currentDisplayCurrency
-                            }
-                        ]
-                    },
-                    callback: function(response) {
-                        // Success
-                        Swal.fire({
-                            title: '✅ Payment Successful!',
-                            html: `
-                                <div style="text-align:left;">
-                                    <p><strong>Reference:</strong> ${response.reference}</p>
-                                    <p><strong>Amount:</strong> ₵ ${amountToPayGHS.toLocaleString()}</p>
-                                    <p><strong>Duration:</strong> ${currentWeeks} week${currentWeeks > 1 ? 's' : ''}</p>
-                                    <p><strong>Payment Type:</strong> ${currentPaymentType === 'deposit' ? '50% Deposit' : 'Full Payment'}</p>
-                                    <hr style="margin:15px 0;border-color:var(--border);">
-                                    <p>We've sent a receipt to ${email}</p>
-                                    <p>Our team will contact you within 24 hours.</p>
-                                </div>
-                            `,
-                            icon: 'success',
-                            confirmButtonColor: '#00A8C8',
-                            confirmButtonText: '✓ Done',
-                            background: 'var(--card)',
-                            color: 'var(--text2)'
-                        });
-                        
-                        // Optional: Send to WhatsApp for tracking
-                        const waMessage = `Payment Successful!%0ARef: ${response.reference}%0AAmount: ₵ ${amountToPayGHS}%0ADuration: ${currentWeeks} weeks%0AType: ${currentPaymentType === 'deposit' ? 'Deposit' : 'Full'}%0AEmail: ${email}`;
-                        window.open(`https://wa.me/233244997316?text=${waMessage}`, '_blank');
-                    },
-                    onClose: function() {
-                        Swal.fire({
-                            title: 'Payment Not Completed',
-                            text: 'Need help? Our team is ready to assist you.',
-                            icon: 'question',
-                            showCancelButton: true,
-                            confirmButtonColor: '#25D366',
-                            cancelButtonColor: '#00A8C8',
-                            confirmButtonText: '💬 WhatsApp Support',
-                            cancelButtonText: '📧 Email Support'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.open('https://wa.me/233244997316', '_blank');
-                            } else {
-                                window.location.href = 'mailto:info@sacredfootballclub.com';
-                            }
-                        });
-                    }
-                });
-                handler.openIframe();
-            }
-        });
-    }
-    
-    // Event Listeners
-    document.querySelectorAll('.week-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            currentWeeks = parseInt(btn.dataset.weeks);
-            document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            document.getElementById('customWeeks').value = currentWeeks;
-            updateDisplay();
-        });
-    });
-    
-    document.querySelectorAll('.currency-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            currentDisplayCurrency = btn.dataset.currency;
-            document.querySelectorAll('.currency-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            updateDisplay();
-        });
-    });
-    
-    document.querySelectorAll('.payment-option').forEach(opt => {
-        opt.addEventListener('click', () => {
-            currentPaymentType = opt.dataset.paymentType;
-            document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
-            opt.classList.add('selected');
-            updateDisplay();
-        });
-    });
-    
-    document.getElementById('payButton').addEventListener('click', payWithPaystack);
-    
-    // Theme toggle
-    const themeToggle = document.getElementById('themeToggle');
-    const root = document.documentElement;
-    const savedTheme = localStorage.getItem('svfa-theme') || 'dark';
-    if (savedTheme === 'light') {
-        root.setAttribute('data-theme', 'light');
-        themeToggle.textContent = '☀️';
-    }
-    themeToggle.addEventListener('click', () => {
-        const isLight = root.getAttribute('data-theme') === 'light';
-        if (isLight) {
-            root.removeAttribute('data-theme');
-            themeToggle.textContent = '🌙';
-            localStorage.setItem('svfa-theme', 'dark');
-        } else {
-            root.setAttribute('data-theme', 'light');
-            themeToggle.textContent = '☀️';
-            localStorage.setItem('svfa-theme', 'light');
-        }
-    });
-    
-    // Hamburger menu
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('open');
-        navLinks.classList.toggle('open');
-    });
-    
-    // Initialize
-    fetchExchangeRates();
-    updateDisplay();
-    
-    // Refresh rates every 10 minutes
-    setInterval(fetchExchangeRates, 10 * 60 * 1000);
-</script>
+    <!-- REGISTRATION FORM MODAL -->
+    <div class="vacancy-overlay" id="registerModal">
+      <div class="vacancy-form-box">
+        <button class="vf-close" onclick="document.getElementById('registerModal').classList.remove('active')">&times;</button>
+        <h3>Register for Summer Camp 2026</h3>
+        <p class="vf-sub">Sacred Vision Football Academy — Winneba, Ghana</p>
+        <form
+          id="registerForm"
+          onsubmit="return false;"
+        >
 
-<!-- Registration Modal -->
-<div class="vacancy-overlay" id="registerModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center;">
-    <div style="background: var(--card); border-radius: 24px; max-width: 500px; width: 90%; padding: 32px; position: relative;">
-        <button onclick="document.getElementById('registerModal').style.display='none'" style="position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--muted);">&times;</button>
-        <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--text); margin-bottom: 8px;">Register Interest</h3>
-        <p style="color: var(--muted); margin-bottom: 24px;">Fill out the form and we'll contact you within 24 hours.</p>
-        <form onsubmit="event.preventDefault(); Swal.fire('Registration Sent!', 'We\'ll contact you soon.', 'success'); document.getElementById('registerModal').style.display='none';">
-            <input type="text" placeholder="Full Name" style="width: 100%; padding: 12px; margin-bottom: 12px; background: var(--input-bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text);">
-            <input type="email" placeholder="Email" style="width: 100%; padding: 12px; margin-bottom: 12px; background: var(--input-bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text);">
-            <input type="tel" placeholder="WhatsApp Number" style="width: 100%; padding: 12px; margin-bottom: 12px; background: var(--input-bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text);">
-            <button type="submit" style="width: 100%; background: var(--teal); color: white; padding: 14px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Submit</button>
+          <div class="vf-row">
+            <div class="vf-group">
+              <label for="reg-fname">First Name *</label>
+              <input type="text" id="reg-fname" name="First Name" required placeholder="John">
+            </div>
+            <div class="vf-group">
+              <label for="reg-lname">Last Name *</label>
+              <input type="text" id="reg-lname" name="Last Name" required placeholder="Doe">
+            </div>
+          </div>
+
+          <div class="vf-row">
+            <div class="vf-group">
+              <label for="reg-email">Email Address *</label>
+              <input type="email" id="reg-email" name="Email" required placeholder="you@example.com">
+            </div>
+            <div class="vf-group">
+              <label for="reg-phone">Phone Number *</label>
+              <input type="tel" id="reg-phone" name="Phone" required placeholder="+233 24 000 0000">
+            </div>
+          </div>
+
+          <div class="vf-row">
+            <div class="vf-group">
+              <label for="reg-dob">Date of Birth *</label>
+              <input type="date" id="reg-dob" name="Date of Birth" required>
+            </div>
+            <div class="vf-group">
+              <label for="reg-nationality">Nationality *</label>
+              <input type="text" id="reg-nationality" name="Nationality" required placeholder="e.g. Ghanaian">
+            </div>
+          </div>
+
+          <div class="vf-row">
+            <div class="vf-group">
+              <label for="reg-position">Playing Position *</label>
+              <select id="reg-position" name="Playing Position" required>
+                <option value="" disabled selected>Select position…</option>
+                <option value="Goalkeeper">Goalkeeper</option>
+                <option value="Centre-Back">Centre-Back</option>
+                <option value="Full-Back">Full-Back</option>
+                <option value="Defensive Midfielder">Defensive Midfielder</option>
+                <option value="Central Midfielder">Central Midfielder</option>
+                <option value="Attacking Midfielder">Attacking Midfielder</option>
+                <option value="Winger">Winger</option>
+                <option value="Striker">Striker</option>
+              </select>
+            </div>
+            <div class="vf-group">
+              <label for="reg-programme">Number of Weeks *</label>
+              <select id="reg-programme" name="Number of Weeks" required>
+                <option value="" disabled selected>Select duration…</option>
+                <option value="1 Week (7 days)">1 Week (7 days)</option>
+                <option value="2 Weeks (14 days)">2 Weeks (14 days)</option>
+                <option value="3 Weeks (21 days)">3 Weeks (21 days)</option>
+                <option value="4 Weeks (28 days)">4 Weeks (28 days)</option>
+                <option value="5 Weeks (35 days)">5 Weeks (35 days)</option>
+                <option value="6 Weeks (42 days)">6 Weeks (42 days)</option>
+                <option value="7 Weeks (49 days)">7 Weeks (49 days)</option>
+                <option value="8 Weeks (56 days)">8 Weeks (56 days)</option>
+                <option value="Full Season (11 weeks)">Full Season (11 weeks)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="vf-group">
+            <label for="reg-start">Preferred Start Date *</label>
+            <select id="reg-start" name="Preferred Start Date" required>
+              <option value="" disabled selected>Select a Monday…</option>
+              <option value="June 15, 2026">June 15, 2026</option>
+              <option value="June 22, 2026">June 22, 2026</option>
+              <option value="June 29, 2026">June 29, 2026</option>
+              <option value="July 6, 2026">July 6, 2026</option>
+              <option value="July 13, 2026">July 13, 2026</option>
+              <option value="July 20, 2026">July 20, 2026</option>
+              <option value="July 27, 2026">July 27, 2026</option>
+              <option value="August 3, 2026">August 3, 2026</option>
+              <option value="August 10, 2026">August 10, 2026</option>
+              <option value="August 17, 2026">August 17, 2026</option>
+            </select>
+          </div>
+
+          <div class="vf-row">
+            <div class="vf-group">
+              <label for="reg-rate">Rate Type *</label>
+              <select id="reg-rate" name="Rate Type" required>
+                <option value="" disabled selected>Select rate…</option>
+                <option value="Local Rate (GHS)">Local Rate (GHS)</option>
+                <option value="International Rate (USD)">International Rate (USD)</option>
+              </select>
+            </div>
+            <div class="vf-group">
+              <label for="reg-parent">Parent/Guardian Name</label>
+              <input type="text" id="reg-parent" name="Parent Guardian Name" placeholder="If under 18">
+            </div>
+          </div>
+
+          <div class="vf-group">
+            <label for="reg-medical">Medical Conditions / Allergies</label>
+            <textarea id="reg-medical" name="Medical Info" placeholder="Any medical conditions, allergies, or dietary requirements we should know about…"></textarea>
+          </div>
+
+          <div class="vf-group">
+            <label for="reg-extra">Anything else?</label>
+            <textarea id="reg-extra" name="Additional Info" placeholder="Previous football experience, current club, questions, etc."></textarea>
+          </div>
+
+          <button type="submit" class="vf-submit" id="reg-submit-btn">Submit Registration</button>
         </form>
+      </div>
     </div>
+
+    </main>
+    <footer>
+      <div class="footer-top">
+        <div>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              margin-bottom: 10px;
+            "
+          >
+            <img
+              src="images/logo.jpg"
+              width="44"
+              height="44"
+              style="
+                height: 44px;
+                width: 44px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 2px solid var(--teal);
+              "
+              alt="SVFA Logo"
+              loading="lazy"
+            />
+            <div class="footer-brand">
+              Sacred Vision <span>Football Academy</span>
+            </div>
+          </div>
+          <p class="footer-desc">
+            Sacred Vision Football Academy Summer Camp. Winneba, Ghana's
+            Central Region. Elite football and the authentic Ghana experience.
+            June 15 – August 30, 2026.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Camp</h4>
+          <ul>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="programme.html">Programme</a></li>
+            <li><a href="coaches.html">Coaches</a></li>
+            <li><a href="coaches.html#vacancies">Vacancies</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="pricing.html?register=1">Register</a></li>
+            <li><a href="gallery.html">Instagram</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Info</h4>
+          <ul>
+            <li><a href="gallery.html">Instagram</a></li>
+            <li><a href="programme.html#faq">FAQs</a></li>
+            <li><a href="experience.html#safety">Safeguarding</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li>
+              <a
+                href="#"
+                onclick="
+                  document.getElementById('termsModal').classList.add('active');
+                  return false;
+                "
+                >Terms</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                onclick="
+                  document
+                    .getElementById('privacyModal')
+                    .classList.add('active');
+                  return false;
+                "
+                >Privacy</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Social</h4>
+          <ul>
+            <li>
+              <a
+                href="https://www.instagram.com/svacademy_fc/"
+                target="_blank"
+                rel="noopener"
+                >Instagram</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.facebook.com/share/1AYk8XNthR/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener"
+                >Facebook</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://wa.me/233247012493"
+                target="_blank"
+                rel="noopener"
+                >WhatsApp</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.youtube.com/@sacredvisionacademy"
+                target="_blank"
+                rel="noopener"
+                >YouTube</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          © 2026 <span>Sacred Vision Football Academy</span>. All rights
+          reserved.
+        </p>
+        <div class="footer-flags">
+          <div class="ffb" style="background: #006b3f"></div>
+          <div class="ffb" style="background: #fcd116"></div>
+          <div class="ffb" style="background: #ce1126"></div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/233247012493" class="wa-fab" target="_blank" rel="noopener" title="Chat on WhatsApp">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+      </svg>
+    </a>
+
+    <!-- TERMS & CONDITIONS MODAL -->
+    <div class="legal-overlay" id="termsModal">
+      <div class="legal-box">
+        <button class="legal-close" aria-label="Close">&times;</button>
+        <h3>Terms & Conditions</h3>
+        <p><strong>Last updated:</strong> March 2026</p>
+        <h4>1. Registration & Booking</h4>
+        <p>
+          Registration is confirmed upon receipt of a 50% deposit. The remaining
+          balance is due before the camper's start date. All payments are
+          processed via Paystack (card, mobile money, or bank transfer).
+        </p>
+        <h4>2. Cancellation & Refunds</h4>
+        <p>
+          The 50% deposit is non-refundable. The remaining 50% is refundable if
+          cancellation is made more than 21 days before the start date.
+          Cancellations within 21 days of the start date are non-refundable.
+          Sacred Vision reserves the right to cancel any programme due to
+          unforeseen circumstances, in which case a full refund will be issued.
+        </p>
+        <h4>3. Medical & Health</h4>
+        <p>
+          All participants must complete a medical information form before
+          arrival. Participants are responsible for maintaining valid travel and
+          medical insurance for the duration of their stay. Sacred Vision
+          provides on-site first aid but is not responsible for pre-existing
+          medical conditions.
+        </p>
+        <h4>4. Code of Conduct</h4>
+        <p>
+          All participants are expected to behave respectfully toward staff,
+          coaches, fellow campers, and the local community. Sacred Vision
+          reserves the right to dismiss any participant whose behaviour is
+          deemed disruptive, dangerous, or in violation of the academy's values.
+          No refund will be issued in such cases.
+        </p>
+        <h4>5. Liability</h4>
+        <p>
+          Sacred Vision Football Academy takes all reasonable measures to ensure
+          the safety of participants. However, football is a contact sport and
+          injuries may occur. By registering, participants (or their guardians)
+          acknowledge and accept the inherent risks of physical activity.
+        </p>
+        <h4>6. Media Consent</h4>
+        <p>
+          By participating in the programme, campers consent to photographs and
+          video footage being taken for promotional use by Sacred Vision
+          Football Academy, unless written objection is provided at
+          registration.
+        </p>
+        <h4>7. Visa & Travel</h4>
+        <p>
+          International participants are responsible for obtaining the
+          appropriate visa to enter Ghana. Sacred Vision provides an official
+          invitation letter upon receipt of full payment. Sacred Vision is not
+          responsible for visa refusals or travel disruptions.
+        </p>
+        <h4>8. Governing Law</h4>
+        <p>These terms are governed by the laws of the Republic of Ghana.</p>
+        <p>
+          For questions about these terms, contact
+          <a href="mailto:info@sacredvisionfootballclub.com" style="color: var(--teal)"
+            >info@sacredvisionfootballclub.com</a
+          >.
+        </p>
+      </div>
+    </div>
+
+    <!-- PRIVACY POLICY MODAL -->
+    <div class="legal-overlay" id="privacyModal">
+      <div class="legal-box">
+        <button class="legal-close" aria-label="Close">&times;</button>
+        <h3>Privacy Policy</h3>
+        <p><strong>Last updated:</strong> March 2026</p>
+        <h4>1. Information We Collect</h4>
+        <p>
+          We collect personal information provided during registration,
+          including: name, email, phone number, age, nationality, and any
+          medical information required for participation. We may also collect
+          usage data through our website.
+        </p>
+        <h4>2. How We Use Your Information</h4>
+        <ul>
+          <li>To process registrations and communicate about the programme</li>
+          <li>To provide medical and safety support during the camp</li>
+          <li>To send programme updates and newsletters (with consent)</li>
+          <li>To improve our services and website</li>
+        </ul>
+        <h4>3. Data Sharing</h4>
+        <p>
+          We do not sell or share your personal information with third parties,
+          except where required by law, or with payment processors (Paystack) to
+          complete transactions.
+        </p>
+        <h4>4. Data Security</h4>
+        <p>
+          We take reasonable measures to protect personal information from
+          unauthorized access, alteration, or destruction. However, no internet
+          transmission is 100% secure.
+        </p>
+        <h4>5. Your Rights</h4>
+        <p>
+          You may request access to, correction of, or deletion of your personal
+          data at any time by contacting us at
+          <a href="mailto:info@sacredvisionfootballclub.com" style="color: var(--teal)"
+            >info@sacredvisionfootballclub.com</a
+          >.
+        </p>
+        <h4>6. Cookies</h4>
+        <p>
+          Our website uses localStorage to save your theme preference
+          (dark/light mode). We do not use tracking cookies or third-party
+          analytics.
+        </p>
+        <h4>7. Contact</h4>
+        <p>
+          For privacy-related inquiries, contact
+          <a href="mailto:info@sacredvisionfootballclub.com" style="color: var(--teal)"
+            >info@sacredvisionfootballclub.com</a
+          >.
+        </p>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <!-- Paystack handles both local and international payments -->
+    <script src="js/payment.js?v=13" defer></script>
+    <script src="js/shared.js"></script>
+    <!-- STRUCTURED DATA / SCHEMA MARKUP -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsActivityLocation",
+        "name": "Sacred Vision Football Academy",
+        "description": "Elite football summer camp in Winneba, Ghana. GFA-registered academy offering daily training, full board, cultural experiences for players aged 15–25.",
+        "url": "https://www.sacredvisionfootball.com",
+        "image": "https://www.sacredvisionfootball.com/images/og-share.jpg",
+        "telephone": ["+233247012493", "+18175856873"],
+        "email": "info@sacredvisionfootballclub.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Winneba",
+          "addressRegion": "Central Region",
+          "addressCountry": "GH"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 5.2,
+          "longitude": -1.3
+        },
+        "sport": "Football",
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "opens": "06:30",
+          "closes": "22:00"
+        },
+        "event": {
+          "@type": "SportsEvent",
+          "name": "Sacred Vision Football Academy Summer Camp 2026",
+          "startDate": "2026-06-15",
+          "endDate": "2026-08-30",
+          "location": {
+            "@type": "Place",
+            "name": "Sacred Vision Football Academy",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Winneba",
+              "addressRegion": "Central Region",
+              "addressCountry": "GH"
+            }
+          },
+          "offers": [
+            {
+              "@type": "Offer",
+              "name": "Local Rate",
+              "price": "400",
+              "priceCurrency": "GHS",
+              "description": "Daily rate for families based in Ghana"
+            },
+            {
+              "@type": "Offer",
+              "name": "International Rate",
+              "price": "85",
+              "priceCurrency": "USD",
+              "description": "Daily rate for international participants, includes accommodation"
+            }
+          ]
+        },
+        "sameAs": [
+          "https://www.instagram.com/svacademy_fc/",
+          "https://www.youtube.com/@sacredvisionacademy",
+          "https://www.facebook.com/share/1AYk8XNthR/?mibextid=wwXIfr"
+        ]
+      }
+    </script>
+<!-- Cookie Consent -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(7,16,15,0.95);backdrop-filter:blur(12px);padding:16px 24px;z-index:10000;border-top:1px solid rgba(108,228,210,0.15)">
+  <div style="max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <p style="margin:0;font-size:0.9rem;color:#b4c0bf;flex:1;min-width:240px">We use cookies to analyse site traffic and improve your experience. By continuing, you agree to our use of cookies.</p>
+    <div style="display:flex;gap:8px">
+      <button onclick="acceptCookies()" style="background:#6ce4d2;color:#07100f;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.85rem">Accept</button>
+      <button onclick="declineCookies()" style="background:transparent;color:#b4c0bf;border:1px solid rgba(108,228,210,0.3);padding:10px 24px;border-radius:8px;cursor:pointer;font-size:0.85rem">Decline</button>
+    </div>
+  </div>
 </div>
-
-<style>
-    .vacancy-overlay[style*="display: flex"] { display: flex !important; }
-</style>
-
-</body>
+<script>
+(function(){
+  if(!localStorage.getItem('cookie-consent')){
+    document.getElementById('cookie-banner').style.display='block';
+  }
+})();
+function acceptCookies(){
+  localStorage.setItem('cookie-consent','accepted');
+  document.getElementById('cookie-banner').style.display='none';
+  var s=document.createElement('script');s.async=true;
+  s.src='https://www.googletagmanager.com/gtag/js?id=G-C66WVX6787';
+  document.head.appendChild(s);
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js',new Date());gtag('config','G-C66WVX6787');
+}
+function declineCookies(){
+  localStorage.setItem('cookie-consent','declined');
+  document.getElementById('cookie-banner').style.display='none';
+  window['ga-disable-G-C66WVX6787']=true;
+}
+</script>
+  </body>
 </html>

@@ -223,8 +223,8 @@
       }
       [data-theme="light"] .hero-overlay {
         background:
-          linear-gradient(135deg, rgba(242,249,251,0.92) 0%, rgba(242,249,251,0.7) 40%, rgba(242,249,251,0.35) 100%),
-          linear-gradient(to top, rgba(242,249,251,0.95) 0%, transparent 40%);
+          linear-gradient(135deg, rgba(7,16,15,0.78) 0%, rgba(7,16,15,0.5) 40%, rgba(7,16,15,0.25) 100%),
+          linear-gradient(to top, rgba(242,249,251,0.98) 0%, transparent 35%);
       }
       .hero-content {
         position: relative;
@@ -246,8 +246,14 @@
         width: fit-content;
       }
       [data-theme="light"] .hero-badge {
-        background: rgba(255,255,255,0.5);
-        border-color: rgba(0,168,200,0.3);
+        background: rgba(0,0,0,0.3);
+        border-color: rgba(0,168,200,0.25);
+      }
+      [data-theme="light"] .hero-badge-name {
+        color: #fff;
+      }
+      [data-theme="light"] .hero-badge-sub {
+        color: rgba(255,255,255,0.7);
       }
       .hero-logo {
         height: 48px;
@@ -306,7 +312,7 @@
         margin-bottom: 32px;
       }
       [data-theme="light"] .hero-desc {
-        color: var(--text2);
+        color: rgba(255,255,255,0.85);
       }
       .hero-btns {
         display: flex;
@@ -323,8 +329,8 @@
         color: var(--teal);
       }
       [data-theme="light"] .hero-btn-alt {
-        border-color: var(--border);
-        color: var(--text2);
+        border-color: rgba(255,255,255,0.3);
+        color: rgba(255,255,255,0.9);
       }
       .hero-bottom-bar {
         position: relative;
@@ -341,8 +347,9 @@
         margin-top: auto;
       }
       [data-theme="light"] .hero-bottom-bar {
-        background: rgba(255,255,255,0.6);
-        border-top-color: rgba(0,168,200,0.2);
+        background: rgba(0,0,0,0.35);
+        backdrop-filter: blur(16px);
+        border-top-color: rgba(0,168,200,0.15);
       }
       .hero-stat-item {
         text-align: center;
@@ -353,7 +360,13 @@
         background: rgba(255,255,255,0.12);
       }
       [data-theme="light"] .hero-stat-divider {
-        background: rgba(0,0,0,0.1);
+        background: rgba(255,255,255,0.15);
+      }
+      [data-theme="light"] .hero-bottom-bar .stat-l {
+        color: rgba(255,255,255,0.65);
+      }
+      [data-theme="light"] .hero-bottom-bar .stat-n {
+        color: var(--orange);
       }
       .hero-stat-logos {
         display: flex;
@@ -1918,7 +1931,8 @@
       }
       [data-theme="light"] .hero h1,
       [data-theme="light"] .hero-title {
-        text-shadow: none;
+        color: #fff;
+        text-shadow: 0 2px 20px rgba(0,0,0,0.4);
       }
       [data-theme="light"] .wa-fab {
         box-shadow: 0 4px 24px rgba(37, 211, 102, 0.35);
@@ -2821,6 +2835,13 @@
       @media (max-width: 900px) {
         .mobile-cta-bar {
           display: flex;
+        }
+        /* Hide duplicate Register Now buttons on mobile */
+        .nav-cta {
+          display: none !important;
+        }
+        .hero-btns .btn-pulse {
+          display: none !important;
         }
         /* Move WhatsApp FAB up above the sticky bar */
         .wa-fab {

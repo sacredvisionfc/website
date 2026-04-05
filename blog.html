@@ -1,25 +1,24 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blog — Sacred Vision Football Academy</title>
-    <meta name="description" content="Latest news, match reports, player stories, and updates from Sacred Vision Football Academy in Enyan-Abaasa, Ghana." />
+    <meta name="description" content="Latest news, match reports, player stories, and updates from Sacred Vision Football Academy in Winneba, Ghana." />
     <meta name="keywords" content="football camp Ghana, soccer academy Ghana, SVFA, Sacred Vision Football Academy, blog, news, match reports, player stories" />
     <meta name="author" content="Sacred Vision Football Academy" />
     <meta name="theme-color" content="#07100F" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Blog — Sacred Vision Football Academy" />
-    <meta property="og:description" content="Latest news, match reports, player stories, and updates from Sacred Vision Football Academy in Enyan-Abaasa, Ghana." />
+    <meta property="og:description" content="Latest news, match reports, player stories, and updates from Sacred Vision Football Academy in Winneba, Ghana." />
     <meta property="og:image" content="https://www.sacredvisionfootball.com/images/og-share.jpg" />
     <meta property="og:url" content="https://www.sacredvisionfootball.com/blog" />
     <meta property="og:site_name" content="Sacred Vision Football Academy" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Blog — Sacred Vision Football Academy" />
-    <meta name="twitter:description" content="Latest news, match reports, player stories, and updates from Sacred Vision Football Academy in Enyan-Abaasa, Ghana." />
+    <meta name="twitter:description" content="Latest news, match reports, player stories, and updates from Sacred Vision Football Academy in Winneba, Ghana." />
     <meta name="twitter:image" content="https://www.sacredvisionfootball.com/images/og-share.jpg" />
     <link rel="canonical" href="https://www.sacredvisionfootball.com/blog" />
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
@@ -29,13 +28,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/styles.min.css?v=1.0" />
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C66WVX6787"></script>
+    <!-- Google Analytics — deferred until cookie consent -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-C66WVX6787');
+      (function(){
+        if(localStorage.getItem('cookie-consent')==='accepted'){
+          var s=document.createElement('script');
+          s.async=true;
+          s.src='https://www.googletagmanager.com/gtag/js?id=G-C66WVX6787';
+          document.head.appendChild(s);
+          window.dataLayer=window.dataLayer||[];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js',new Date());
+          gtag('config','G-C66WVX6787');
+        }
+      })();
     </script>
   </head>
   <body>
@@ -57,9 +63,9 @@
         <li><a href="index.html#contact">Contact</a></li>
       </ul>
       <div class="nav-right">
-        <a href="https://wa.me/233244997316" class="nav-wa" target="_blank" rel="noopener" title="Chat on WhatsApp">
+        <a href="https://wa.me/233247012493" class="nav-wa" target="_blank" rel="noopener" title="Chat on WhatsApp">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          +233 24 499 7316
+          +233 24 701 2493
         </a>
         <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
         <button class="theme-toggle" id="themeToggle" title="Toggle light/dark mode" aria-label="Toggle light/dark mode"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
@@ -76,7 +82,7 @@
           The Sacred Vision <span class="g">Blog</span>
         </h1>
         <p class="intro reveal reveal-d2">
-          Match reports, player stories, academy updates, and life in Enyan-Abaasa — straight from the pitch to your screen.
+          Match reports, player stories, academy updates, and life in Winneba — straight from the pitch to your screen.
         </p>
 
         <!-- BLOG FILTER -->
@@ -190,9 +196,9 @@
                 <span class="blog-meta-dot"></span>
                 <span class="blog-meta-read">5 min read</span>
               </div>
-              <h3 class="blog-card-title">From Enyan-Abaasa to Professional Football: 3 Players Signed</h3>
+              <h3 class="blog-card-title">From Winneba to Professional Football: 3 Players Signed</h3>
               <p class="blog-card-excerpt">
-                Since Sacred Vision Football Academy was founded in June 2022, three players have made the leap from our academy in Enyan-Abaasa to professional contracts. What started as a vision to bridge the gap between rural talent and professional opportunity in Ghana's Central Region has become a proven pathway. These signings are proof that talent exists everywhere — it just needs the right environment to develop. Through daily training, competitive Division 2 matches, formal talent evaluation, and exposure to scouts, our player pathway is delivering real results. Over 200 players have been developed through the academy, and this is just the beginning.
+                Since Sacred Vision Football Academy was founded in June 2022, three players have made the leap from our academy in Winneba to professional contracts. What started as a vision to bridge the gap between rural talent and professional opportunity in Ghana's Central Region has become a proven pathway. These signings are proof that talent exists everywhere — it just needs the right environment to develop. Through daily training, competitive Division 2 matches, formal talent evaluation, and exposure to scouts, our player pathway is delivering real results. Over 200 players have been developed through the academy, and this is just the beginning.
               </p>
               <div class="blog-card-footer">
                 <div class="blog-card-author">
@@ -248,9 +254,9 @@
                 <span class="blog-meta-dot"></span>
                 <span class="blog-meta-read">4 min read</span>
               </div>
-              <h3 class="blog-card-title">Enyan-Abaasa Hosts CRFA U-17 Championship on Local AstroTurf</h3>
+              <h3 class="blog-card-title">Winneba Hosts CRFA U-17 Championship on Local AstroTurf</h3>
               <p class="blog-card-excerpt">
-                The Central Regional Football Association hosted a two-day U-17 Championship right here at the Enyan Abaasa AstroTurf on July 31 – August 1, 2025. The tournament brought together the region's most promising young talent for competitive group-stage matches, with the championship decider held at 3:00 PM on the final day. Scouts, football administrators, and local fans packed the venue to watch the next generation compete on a quality playing surface. This event highlights the growing football infrastructure in Enyan-Abaasa and the Central Region's commitment to unearthing and nurturing grassroots talent — exactly what Sacred Vision was built to do.
+                The Central Regional Football Association hosted a two-day U-17 Championship right here at the Enyan Abaasa AstroTurf on July 31 – August 1, 2025. The tournament brought together the region's most promising young talent for competitive group-stage matches, with the championship decider held at 3:00 PM on the final day. Scouts, football administrators, and local fans packed the venue to watch the next generation compete on a quality playing surface. This event highlights the growing football infrastructure in Winneba and the Central Region's commitment to unearthing and nurturing grassroots talent — exactly what Sacred Vision was built to do.
               </p>
               <div class="blog-card-footer">
                 <div class="blog-card-author">
@@ -279,7 +285,7 @@
               </div>
               <h3 class="blog-card-title">SVFA Partners with Alicante Sports Academy to Expand Player Pathways</h3>
               <p class="blog-card-excerpt">
-                Sacred Vision Football Academy is proud to announce our partnership with Alicante Sports Academy, opening a direct pathway for talented players to gain international exposure in Spain. This affiliation strengthens SVFA's mission to bridge the gap between grassroots talent in Ghana and professional opportunities abroad. Through this partnership, standout players from our programme will have the opportunity to train and trial in Europe — adding a new dimension to the player development pathway that has already produced 3 professional signings. Combined with our existing relationship with Frangeo Sunshine Enterprise, SVFA continues to build a network that gives players in Enyan-Abaasa access to the wider football world.
+                Sacred Vision Football Academy is proud to announce our partnership with Alicante Sports Academy, opening a direct pathway for talented players to gain international exposure in Spain. This affiliation strengthens SVFA's mission to bridge the gap between grassroots talent in Ghana and professional opportunities abroad. Through this partnership, standout players from our programme will have the opportunity to train and trial in Europe — adding a new dimension to the player development pathway that has already produced 3 professional signings. Combined with our existing relationship with Frangeo Sunshine Enterprise, SVFA continues to build a network that gives players in Winneba access to the wider football world.
               </p>
               <div class="blog-card-footer">
                 <div class="blog-card-author">
@@ -308,7 +314,7 @@
               </div>
               <h3 class="blog-card-title">3,000+ Followers Strong — The SVFA Community Keeps Growing</h3>
               <p class="blog-card-excerpt">
-                Our Instagram community has passed 3,000 followers — and counting. From Enyan-Abaasa to the world, the Sacred Vision family is growing every day. What started as a small academy page sharing training clips and match-day updates has become a platform reaching football fans, aspiring players, parents, and scouts across 12+ countries. With 177+ posts documenting everything from Division 2 League action to daily life at the academy, our socials are a window into what makes Sacred Vision different. Follow @svacademy_fc for the latest, and check out our junior team @svacademy_jr for the next generation coming through.
+                Our Instagram community has passed 3,000 followers — and counting. From Winneba to the world, the Sacred Vision family is growing every day. What started as a small academy page sharing training clips and match-day updates has become a platform reaching football fans, aspiring players, parents, and scouts across 12+ countries. With 177+ posts documenting everything from Division 2 League action to daily life at the academy, our socials are a window into what makes Sacred Vision different. Follow @svacademy_fc for the latest, and check out our junior team @svacademy_jr for the next generation coming through.
               </p>
               <div class="blog-card-footer">
                 <div class="blog-card-author">
@@ -337,7 +343,7 @@
               </div>
               <h3 class="blog-card-title">Introducing SVFA Junior — The Next Generation of Sacred Vision</h3>
               <p class="blog-card-excerpt">
-                Sacred Vision Football Academy is expanding with the launch of our junior team, @svacademy_jr on Instagram. The junior programme focuses on developing young players in Enyan-Abaasa and surrounding communities, giving them early access to structured coaching, competitive football, and the mentorship environment that defines the Sacred Vision approach. This is a direct investment in the future — identifying and nurturing talent from a younger age so that when players are ready for the senior squad and the Division 2 League, they arrive prepared. Coach Vincent's long-term vision for the academy has always included building from the ground up, and the junior team is a major step in that direction.
+                Sacred Vision Football Academy is expanding with the launch of our junior team, @svacademy_jr on Instagram. The junior programme focuses on developing young players in Winneba and surrounding communities, giving them early access to structured coaching, competitive football, and the mentorship environment that defines the Sacred Vision approach. This is a direct investment in the future — identifying and nurturing talent from a younger age so that when players are ready for the senior squad and the Division 2 League, they arrive prepared. Coach Vincent's long-term vision for the academy has always included building from the ground up, and the junior team is a major step in that direction.
               </p>
               <div class="blog-card-footer">
                 <div class="blog-card-author">
@@ -357,7 +363,7 @@
         <!-- SOCIAL CTA -->
         <div style="text-align:center;margin-top:56px;">
           <p style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.06em;color:var(--text);">Follow Us for Live Updates</p>
-          <p style="font-size:0.88rem;color:var(--muted);margin-bottom:24px;">Training clips, match-day content, and behind-the-scenes from Enyan-Abaasa.</p>
+          <p style="font-size:0.88rem;color:var(--muted);margin-bottom:24px;">Training clips, match-day content, and behind-the-scenes from Winneba.</p>
           <div style="display:flex;gap:16px;justify-content:center;align-items:center;flex-wrap:wrap;">
             <a href="https://www.instagram.com/svacademy_fc/" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;font-size:0.8rem;">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
@@ -400,7 +406,7 @@
             <div class="footer-brand">Sacred Vision <span>Football Academy</span></div>
           </div>
           <p class="footer-desc">
-            Sacred Vision Football Academy Summer Camp. Enyan-Abaasa, Ghana's Central Region. Elite football and the authentic Ghana experience. June 15 – August 30, 2026.
+            Sacred Vision Football Academy Summer Camp. Winneba, Ghana's Central Region. Elite football and the authentic Ghana experience. June 15 – August 30, 2026.
           </p>
         </div>
         <div class="footer-col">
@@ -430,9 +436,9 @@
         <div class="footer-col">
           <h4>Social</h4>
           <ul>
-            <li><a href="https://www.instagram.com/svacademy_fc" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.instagram.com/svacademy_fc/" target="_blank" rel="noopener">Instagram</a></li>
             <li><a href="https://www.facebook.com/share/1AYk8XNthR/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a></li>
-            <li><a href="https://wa.me/233244997316" target="_blank" rel="noopener">WhatsApp</a></li>
+            <li><a href="https://wa.me/233247012493" target="_blank" rel="noopener">WhatsApp</a></li>
             <li><a href="https://www.youtube.com/@sacredvisionacademy" target="_blank" rel="noopener">YouTube</a></li>
           </ul>
         </div>
@@ -451,7 +457,7 @@
 
     <!-- STICKY MOBILE CTA BAR -->
     <div class="mobile-cta-bar">
-      <a href="https://wa.me/233244997316" class="mobile-cta-wa" target="_blank" rel="noopener">
+      <a href="https://wa.me/233247012493" class="mobile-cta-wa" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         WhatsApp
       </a>
@@ -459,7 +465,7 @@
     </div>
 
     <!-- FLOATING WHATSAPP BUTTON -->
-    <a href="https://wa.me/233244997316" class="wa-fab" target="_blank" rel="noopener" title="Chat on WhatsApp">
+    <a href="https://wa.me/233247012493" class="wa-fab" target="_blank" rel="noopener" title="Chat on WhatsApp">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
       </svg>
@@ -467,6 +473,33 @@
 
     <script src="js/shared.js" defer></script>
     <script>
+      // Email subscribe
+      document.getElementById("emailForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        var btn = document.getElementById("emailSubmit");
+        var emailInput = this.querySelector('input[type="email"]');
+        btn.textContent = "Subscribing...";
+        btn.disabled = true;
+        fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            access_key: "34b15cce-97e2-47df-8ad6-cc13822b374f",
+            subject: "New Email Subscriber — SVFA",
+            from_name: "SVFA Website",
+            email: emailInput.value,
+            message: "New subscriber: " + emailInput.value
+          })
+        }).then(function(res) { return res.json(); }).then(function() {
+          btn.textContent = "Subscribed!";
+          emailInput.value = "";
+          setTimeout(function() { btn.textContent = "Subscribe"; btn.disabled = false; }, 3000);
+        }).catch(function() {
+          btn.textContent = "Error — try again";
+          btn.disabled = false;
+        });
+      });
+
       // Blog filter functionality
       document.querySelectorAll('.blog-filter').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -484,5 +517,37 @@
         });
       });
     </script>
+<!-- Cookie Consent -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(7,16,15,0.95);backdrop-filter:blur(12px);padding:16px 24px;z-index:10000;border-top:1px solid rgba(108,228,210,0.15)">
+  <div style="max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <p style="margin:0;font-size:0.9rem;color:#b4c0bf;flex:1;min-width:240px">We use cookies to analyse site traffic and improve your experience. By continuing, you agree to our use of cookies.</p>
+    <div style="display:flex;gap:8px">
+      <button onclick="acceptCookies()" style="background:#6ce4d2;color:#07100f;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.85rem">Accept</button>
+      <button onclick="declineCookies()" style="background:transparent;color:#b4c0bf;border:1px solid rgba(108,228,210,0.3);padding:10px 24px;border-radius:8px;cursor:pointer;font-size:0.85rem">Decline</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  if(!localStorage.getItem('cookie-consent')){
+    document.getElementById('cookie-banner').style.display='block';
+  }
+})();
+function acceptCookies(){
+  localStorage.setItem('cookie-consent','accepted');
+  document.getElementById('cookie-banner').style.display='none';
+  var s=document.createElement('script');s.async=true;
+  s.src='https://www.googletagmanager.com/gtag/js?id=G-C66WVX6787';
+  document.head.appendChild(s);
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js',new Date());gtag('config','G-C66WVX6787');
+}
+function declineCookies(){
+  localStorage.setItem('cookie-consent','declined');
+  document.getElementById('cookie-banner').style.display='none';
+  window['ga-disable-G-C66WVX6787']=true;
+}
+</script>
   </body>
 </html>
