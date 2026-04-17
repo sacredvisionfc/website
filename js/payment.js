@@ -371,25 +371,23 @@ if (registerModal) {
   }
 }
 
-// ── REGISTRATION INTEREST FORM (inline form) ────────
+// ── REGISTRATION FORM (inline form) ──────────────────
 var regForm = document.getElementById("regForm");
 if (regForm) {
   regForm.addEventListener("submit", function(e) {
     e.preventDefault();
     var btn = document.getElementById("regSubmit");
     var orig = btn.textContent;
-    btn.textContent = "Sending\u2026";
+    btn.textContent = "Submitting\u2026";
     btn.disabled = true;
-    var fields = this.querySelectorAll(".reg-input");
-    var labels = ["Name", "Email", "Phone", "Age", "Nationality", "Number of Weeks", "Start Date", "Rate", "Notes"];
-    var formData = new FormData();
+
+    // Build FormData straight from the form — uses each input's name attribute
+    var formData = new FormData(regForm);
     formData.append("access_key", "34b15cce-97e2-47df-8ad6-cc13822b374f");
-    formData.append("subject", "Camp Registration Interest \u2014 " + (fields[0] ? fields[0].value.trim() : "Unknown"));
+    var playerName = (formData.get("player_full_name") || "Unknown").toString().trim();
+    var playerType = (formData.get("player_type") || "local").toString();
+    formData.set("subject", "Camp Registration \u2014 " + playerName + " (" + playerType + ")");
     formData.append("from_name", "SVFA Website");
-    fields.forEach(function(f, i) {
-      var val = f.value.trim();
-      if (val && val !== "") formData.append(labels[i] || ("Field " + i), val);
-    });
 
     fetch("https://api.web3forms.com/submit", { method: "POST", body: formData })
       .then(function(res) { return res.json(); })
@@ -397,8 +395,22 @@ if (regForm) {
         btn.disabled = false;
         if (data.success) {
           regForm.reset();
-          btn.textContent = "\u2713 Registration Sent!";
-          setTimeout(function() { btn.textContent = orig; }, 3000);
+          if (typeof setRegType === 'function') setRegType('local');
+          btn.textContent = "\u2713 Registration Submitted!";
+          // Show success modal with next steps
+          if (typeof Swal !== 'undefined') {
+            Swal.fire({
+              icon: "success",
+              title: "Registration Received",
+              html: 'Thanks ' + playerName.split(' ')[0] + '! Our team will confirm your spot within 24 hours and send you a secure payment link.<br><br><a href="https://wa.me/233247012493" target="_blank" rel="noopener" style="color:var(--teal);">Want it faster? WhatsApp us \u2192</a>',
+              confirmButtonText: "Got it",
+              confirmButtonColor: "#6CE4D2",
+              background: "var(--bg)",
+              color: "var(--text2)",
+              customClass: { popup: 'swal-popup-custom' }
+            });
+          }
+          setTimeout(function() { btn.textContent = orig; }, 4000);
         } else {
           btn.textContent = orig;
           alert("Submission failed. Please try again or contact us on WhatsApp.");
