@@ -27,7 +27,7 @@
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/styles.min.css?v=1.0" />
+    <link rel="stylesheet" href="css/styles.min.css?v=1.2" />
     <!-- Google Analytics — deferred until cookie consent -->
     <script>
       (function(){
@@ -128,7 +128,7 @@
             <li>Multiple friendly matches</li>
             <li>Professional mentorship sessions</li>
             <li>Talent evaluation & scouting report</li>
-            <li><strong style="color:var(--teal);">Video match analysis</strong></li>
+            <li><strong class="hl">Video match analysis</strong></li>
             <li>Player assessment report</li>
             <li>Completion certificate</li>
           </ul>
@@ -149,7 +149,7 @@
             <li>12+ friendly matches</li>
             <li>Weekly professional mentorship</li>
             <li>Comprehensive talent evaluation</li>
-            <li><strong style="color:var(--teal);">Video match analysis</strong></li>
+            <li><strong class="hl">Video match analysis</strong></li>
             <li>Player assessment report</li>
             <li>Completion certificate</li>
           </ul>
@@ -158,19 +158,10 @@
 
       <!-- RATE CARDS -->
       <p class="tag reveal">Rates</p>
-      <h3
-        class="reveal reveal-d1"
-        style="
-          font-family: &quot;Bebas Neue&quot;, sans-serif;
-          font-size: 1.6rem;
-          letter-spacing: 0.05em;
-          color: var(--text);
-          margin-top: 12px;
-          margin-bottom: 24px;
-        "
-      >
-        Daily Rate — All Programmes
-      </h3>
+      <h2 class="sec-subheading reveal reveal-d1">Daily Rate — All Programmes</h2>
+      <p class="reveal reveal-d2" style="color:var(--muted);font-size:0.95rem;line-height:1.6;margin-top:-8px;margin-bottom:28px;max-width:720px;">
+        Three options to fit your training goal. All rates are per day — minimum 1 week, book in 7-day blocks.
+      </p>
       <div class="pricing-wrap">
         <div class="price-card">
           <div class="price-flag"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
@@ -188,6 +179,7 @@
             <li>Player assessment report</li>
             <li>Completion certificate</li>
             <li>Medical & safety support</li>
+            <li class="price-list-divider">Not included</li>
             <li class="no">Video coverage</li>
             <li class="no">Cape Coast touring</li>
             <li class="no">Housing / accommodation</li>
@@ -195,7 +187,8 @@
             <li class="no">Feeding</li>
           </ul>
         </div>
-        <div class="price-card">
+        <div class="price-card price-card--popular">
+          <div class="price-badge price-badge--popular">Most Popular</div>
           <div class="price-flag"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6l1.5 3 3.5.5-2.5 2.5.5 3.5L12 14l-3 1.5.5-3.5L7 9.5l3.5-.5z"/></svg></div>
           <div class="price-title">Local Rate</div>
           <div class="price-who">Players resident in Ghana</div>
@@ -216,7 +209,7 @@
             <li>Local transportation during camp</li>
             <li>Cultural sightseeing activities</li>
             <li>Medical & safety support</li>
-            <li><strong style="color:var(--teal);">Video match analysis</strong> <span style="color:var(--muted);font-size:0.78rem;">(2–4 week bookings)</span></li>
+            <li><strong class="hl">Video match analysis</strong> <span class="note">(2–4 week bookings)</span></li>
             <li class="no">Accommodation (enquire for rates)</li>
           </ul>
         </div>
@@ -244,15 +237,13 @@
             <li>Local transportation during camp</li>
             <li>Cultural sightseeing activities</li>
             <li>Medical & safety support</li>
-            <li><strong style="color:var(--teal);">Video match analysis</strong> <span style="color:var(--muted);font-size:0.78rem;">(2–4 week bookings)</span></li>
+            <li><strong class="hl">Video match analysis</strong> <span class="note">(2–4 week bookings)</span></li>
           </ul>
         </div>
       </div>
       <!-- FACILITIES -->
       <p class="tag reveal">Facilities</p>
-      <h3 class="reveal reveal-d1" style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.05em;color:var(--text);margin-top:12px;margin-bottom:24px;">
-        Training Pitch & Accommodation
-      </h3>
+      <h2 class="sec-subheading reveal reveal-d1">Training Pitch & Accommodation</h2>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:40px;">
         <div class="reveal" style="border-radius:20px;overflow:hidden;border:1px solid var(--border);background:var(--card);">
           <picture>
@@ -288,9 +279,7 @@
 
       <!-- TRANSPORT INFO -->
       <p class="tag reveal">Transport</p>
-      <h3 class="reveal reveal-d1" style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.05em;color:var(--text);margin-top:12px;margin-bottom:24px;">
-        Getting to Camp
-      </h3>
+      <h2 class="sec-subheading reveal reveal-d1">Getting to Camp</h2>
       <div class="pricing-wrap">
         <div class="price-card reveal">
           <div class="price-flag"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 17h2m10 0h2M2 9h20M5 13h4m6 0h4"/><rect x="2" y="5" width="20" height="14" rx="3"/></svg></div>
@@ -503,48 +492,48 @@
       </p>
 
       <!-- Local vs Overseas payment summary -->
-      <div class="reveal reveal-d2" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;">
-        <div style="flex:1;min-width:240px;background:var(--card);border:2px solid var(--teal);border-radius:14px;padding:20px;">
-          <div style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;color:var(--teal);text-transform:uppercase;margin-bottom:6px;">🇬🇭 Local Player</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.04em;color:var(--text);margin-bottom:4px;">Resident in Ghana</div>
-          <div style="font-size:0.85rem;color:var(--muted);">Pay in Ghana Cedis (GHS) — Mobile Money, Card, or Bank Transfer.</div>
+      <div class="pay-summary reveal reveal-d2">
+        <div class="pay-summary-card pay-summary-card--local">
+          <div class="pay-summary-tag pay-summary-tag--local">🇬🇭 Local Player</div>
+          <div class="pay-summary-title">Resident in Ghana</div>
+          <div class="pay-summary-desc">Pay in Ghana Cedis (GHS) — Mobile Money, Card, or Bank Transfer.</div>
         </div>
-        <div style="flex:1;min-width:240px;background:var(--card);border:2px solid var(--orange);border-radius:14px;padding:20px;">
-          <div style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;color:var(--orange);text-transform:uppercase;margin-bottom:6px;">✈️ Overseas Player</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.04em;color:var(--text);margin-bottom:4px;">Residence Abroad</div>
-          <div style="font-size:0.85rem;color:var(--muted);">Pay in USD, GBP, or EUR by Card. Auto-converted at live FX.</div>
+        <div class="pay-summary-card pay-summary-card--overseas">
+          <div class="pay-summary-tag pay-summary-tag--overseas">✈️ Overseas Player</div>
+          <div class="pay-summary-title">Residence Abroad</div>
+          <div class="pay-summary-desc">Pay in USD, GBP, or EUR by Card. Auto-converted at live FX.</div>
         </div>
       </div>
 
       <!-- Accepted methods -->
-      <div class="reveal reveal-d2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:28px;max-width:960px;">
-        <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;text-align:center;">
-          <div style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:12px;background:rgba(108,228,210,0.08);margin-bottom:10px;">
+      <div class="pay-methods reveal reveal-d2">
+        <div class="pay-method-card">
+          <div class="pay-method-icon pay-method-icon--teal">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.6"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M11 18h2"/></svg>
           </div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--text);letter-spacing:0.04em;margin-bottom:4px;">1. Mobile Money</div>
-          <div style="font-size:0.78rem;color:var(--muted);">MTN MoMo · Vodafone Cash · AirtelTigo</div>
+          <div class="pay-method-title">1. Mobile Money</div>
+          <div class="pay-method-desc">MTN MoMo · Vodafone Cash · AirtelTigo</div>
         </div>
-        <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;text-align:center;">
-          <div style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:12px;background:rgba(255,165,0,0.1);margin-bottom:10px;">
+        <div class="pay-method-card">
+          <div class="pay-method-icon pay-method-icon--orange">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h2"/></svg>
           </div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--text);letter-spacing:0.04em;margin-bottom:4px;">2. Card</div>
-          <div style="font-size:0.78rem;color:var(--muted);">Visa · Mastercard · GHS / USD / GBP / EUR</div>
+          <div class="pay-method-title">2. Card</div>
+          <div class="pay-method-desc">Visa · Mastercard · GHS / USD / GBP / EUR</div>
         </div>
-        <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;text-align:center;">
-          <div style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:12px;background:rgba(108,228,210,0.08);margin-bottom:10px;">
+        <div class="pay-method-card">
+          <div class="pay-method-icon pay-method-icon--teal">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.6"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-6h6v6"/></svg>
           </div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--text);letter-spacing:0.04em;margin-bottom:4px;">3. Bank Transfer</div>
-          <div style="font-size:0.78rem;color:var(--muted);">Direct deposit to our GH bank account</div>
+          <div class="pay-method-title">3. Bank Transfer</div>
+          <div class="pay-method-desc">Direct deposit to our GH bank account</div>
         </div>
       </div>
 
       <!-- Pay now buttons -->
-      <div class="reveal reveal-d2" style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:20px;">
-        <button onclick="openPaystackPayment()" style="background:var(--orange);color:#07100f;border:none;padding:16px 32px;border-radius:100px;cursor:pointer;font-weight:700;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;font-family:'Outfit',sans-serif;transition:transform 0.15s,box-shadow 0.15s;min-width:240px;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 16px rgba(255,165,0,0.3)'" onmouseout="this.style.transform='';this.style.boxShadow=''">Local — Pay in GHS</button>
-        <button onclick="openInternationalPayment()" style="background:transparent;color:var(--orange);border:1.5px solid var(--orange);padding:15px 32px;border-radius:100px;cursor:pointer;font-weight:700;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;font-family:'Outfit',sans-serif;transition:all 0.15s;min-width:240px;">Overseas — Pay in USD/GBP/EUR</button>
+      <div class="pay-ctas reveal reveal-d2">
+        <button type="button" onclick="openPaystackPayment()" class="btn-rounded btn-rounded--primary">Local — Pay in GHS</button>
+        <button type="button" onclick="openInternationalPayment()" class="btn-rounded btn-rounded--outline">Overseas — Pay in USD/GBP/EUR</button>
       </div>
 
       <p style="font-size:0.85rem;color:var(--muted);text-align:center;margin-bottom:0;">

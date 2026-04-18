@@ -4,7 +4,7 @@
     {
       "name": "svfa",
       "runtimeExecutable": "ruby",
-      "runtimeArgs": ["-run", "-e", "httpd", "--", "--port=8080", "--document-root=."],
+      "runtimeArgs": ["-rwebrick", "-e", "WEBrick::HTTPServer.new(Port: 8080, DocumentRoot: '/tmp/svfa-preview').start"],
       "port": 8080
     }
   ]
