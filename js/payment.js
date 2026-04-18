@@ -37,7 +37,7 @@ function openPaystackPayment() {
           <select id="ps-paytype" class="swal2-input" style="padding:10px 14px;width:100%;box-sizing:border-box;">' + PAYTYPE_OPTIONS + '</select>\
         </div>\
         <div style="background:rgba(108,228,210,0.08);padding:14px 18px;border-radius:12px;border:1px solid rgba(108,228,210,0.15);margin-top:16px;">\
-          <p style="margin:0;font-family:\'Bebas Neue\',sans-serif;font-size:.85rem;letter-spacing:.05em;color:var(--text);">Daily Rate: <strong style="color:var(--teal);">GHS 400/day</strong></p>\
+          <p style="margin:0;font-family:\'Bebas Neue\',sans-serif;font-size:.85rem;letter-spacing:.05em;color:var(--text);">Daily Rate: <strong style="color:var(--teal);">GHS 700/day</strong></p>\
           <p style="margin:4px 0 0;font-size:.75rem;color:var(--muted);" id="ps-info">50% deposit \u00b7 Processed via Paystack</p>\
         </div>\
       </div>',
@@ -59,7 +59,7 @@ function openPaystackPayment() {
     preConfirm: function() {
       var weeks = parseInt(document.getElementById("ps-weeks").value) || 1;
       var payType = document.getElementById("ps-paytype").value;
-      var amount = calcPayment(400, weeks, payType);
+      var amount = calcPayment(700, weeks, payType);
       var payLabel = payType === "deposit" ? "50% Deposit" : payType === "balance" ? "Balance" : "Full Payment";
       var desc = "Local Rate \u2014 " + weeks + (weeks === 1 ? " week" : " weeks") + " \u2014 " + payLabel;
       return { amount: amount, description: desc };

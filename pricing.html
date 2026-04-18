@@ -1,4 +1,4 @@
-<!doctype html>
+git<!doctype html>
 <html lang="en">
   <head>
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -55,6 +55,7 @@
       <ul class="nav-links">
         <li><a href="index.html#about">About</a></li>
         <li><a href="programme.html">Programme</a></li>
+        <li><a href="experience.html">Experience</a></li>
         <li><a href="coaches.html">Coaches</a></li>
         <li><a href="coaches.html#vacancies">Vacancies</a></li>
         <li><a href="pricing.html" class="active">Pricing</a></li>
@@ -169,11 +170,34 @@
       </h3>
       <div class="pricing-wrap">
         <div class="price-card">
+          <div class="price-flag"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <div class="price-title">Day Programme</div>
+          <div class="price-who">Training-only · no overnight stay</div>
+          <div class="price-rate-label">Daily Rate</div>
+          <div class="price-rate">GHS 300</div>
+          <div class="price-per">
+            per day · training sessions only
+          </div>
+          <ul class="price-list">
+            <li>All training, gym & swimming sessions</li>
+            <li>Friendly matches & talent evaluation</li>
+            <li>Professional mentorship</li>
+            <li>Player assessment report</li>
+            <li>Completion certificate</li>
+            <li>Medical & safety support</li>
+            <li class="no">Video coverage</li>
+            <li class="no">Cape Coast touring</li>
+            <li class="no">Housing / accommodation</li>
+            <li class="no">Transportation</li>
+            <li class="no">Feeding</li>
+          </ul>
+        </div>
+        <div class="price-card">
           <div class="price-flag"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6l1.5 3 3.5.5-2.5 2.5.5 3.5L12 14l-3 1.5.5-3.5L7 9.5l3.5-.5z"/></svg></div>
           <div class="price-title">Local Rate</div>
           <div class="price-who">Players resident in Ghana</div>
           <div class="price-rate-label">Daily Rate</div>
-          <div class="price-rate">GHS 400</div>
+          <div class="price-rate">GHS 700</div>
           <div class="price-per">
             per day · minimum 7 days · book in weekly blocks
           </div>
@@ -276,20 +300,20 @@
         <div style="flex:1;min-width:240px;background:var(--card);border:2px solid var(--orange);border-radius:14px;padding:20px;">
           <div style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;color:var(--orange);text-transform:uppercase;margin-bottom:6px;">✈️ Overseas Player</div>
           <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.04em;color:var(--text);margin-bottom:4px;">Residence Abroad</div>
-          <div style="font-size:0.85rem;color:var(--muted);">Pay in USD, GBP, or EUR — Apple Pay, Google Pay, Card. Auto-converted at live FX.</div>
+          <div style="font-size:0.85rem;color:var(--muted);">Pay in USD, GBP, or EUR via Paystack — Card. Auto-converted at live FX.</div>
         </div>
       </div>
 
-      <!-- 2. PAYMENT METHOD CARDS — Paystack | Google Pay | Apple Pay -->
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-bottom:32px;">
+      <!-- 2. PAYMENT METHOD CARD — Paystack -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,420px));gap:20px;margin-bottom:32px;justify-content:center;">
 
-        <!-- 1. PAYSTACK — RECOMMENDED -->
+        <!-- PAYSTACK -->
         <div style="background:var(--card);border:2px solid var(--orange);border-radius:20px;padding:28px 24px;text-align:center;position:relative;box-shadow:0 8px 30px rgba(0,0,0,0.12);">
-          <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--orange);color:#07100f;padding:4px 16px;border-radius:100px;font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-family:'Outfit',sans-serif;">★ Recommended</div>
+          <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--orange);color:#07100f;padding:4px 16px;border-radius:100px;font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-family:'Outfit',sans-serif;">★ Secure Checkout</div>
           <div style="display:inline-flex;align-items:center;justify-content:center;width:54px;height:54px;border-radius:14px;background:rgba(255,165,0,0.1);margin-bottom:14px;">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h2"/></svg>
           </div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--text);letter-spacing:0.04em;margin-bottom:4px;">1. Paystack</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--text);letter-spacing:0.04em;margin-bottom:4px;">Paystack</div>
           <div style="font-size:0.78rem;color:var(--muted);margin-bottom:14px;">Card · Mobile Money · Bank Transfer</div>
           <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:18px;flex-wrap:wrap;">
             <span style="background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.2);border-radius:6px;padding:3px 8px;font-size:0.65rem;color:var(--orange);">Visa</span>
@@ -300,44 +324,6 @@
           <button onclick="openPaystackPayment()" style="background:var(--orange);color:#07100f;border:none;padding:14px 24px;border-radius:100px;cursor:pointer;font-weight:700;font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;font-family:'Outfit',sans-serif;width:100%;margin-bottom:8px;transition:transform 0.15s,box-shadow 0.15s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 16px rgba(255,165,0,0.3)'" onmouseout="this.style.transform='';this.style.boxShadow=''">Local — Pay GHS</button>
           <button onclick="openInternationalPayment()" style="background:transparent;color:var(--orange);border:1.5px solid var(--orange);padding:13px 24px;border-radius:100px;cursor:pointer;font-weight:700;font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;font-family:'Outfit',sans-serif;width:100%;transition:all 0.15s;">Overseas — Pay USD/GBP/EUR</button>
           <div style="margin-top:12px;font-size:0.65rem;color:var(--muted);">PCI-DSS · 3D Secure · SSL</div>
-        </div>
-
-        <!-- 2. GOOGLE PAY -->
-        <div style="background:var(--input-bg);border:1px solid var(--border);border-radius:20px;padding:28px 24px;text-align:center;">
-          <div style="display:inline-flex;align-items:center;justify-content:center;width:54px;height:54px;border-radius:14px;background:rgba(255,255,255,0.05);margin-bottom:14px;">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#fff"/><path d="M12.5 8v4.5h3.6c-.2 1.4-1.5 2.4-3.6 2.4-2.2 0-4-1.8-4-4s1.8-4 4-4c1 0 1.9.4 2.6 1l1.7-1.7C15.6 5 14.1 4.4 12.5 4.4c-3.6 0-6.6 3-6.6 6.6s3 6.6 6.6 6.6c3.8 0 6.3-2.7 6.3-6.5 0-.4 0-.7-.1-1.1h-6.2z" fill="#4285F4"/></svg>
-          </div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--text);letter-spacing:0.04em;margin-bottom:4px;">2. Google Pay</div>
-          <div style="font-size:0.78rem;color:var(--muted);margin-bottom:14px;">One-tap mobile checkout</div>
-          <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:18px;flex-wrap:wrap;">
-            <span style="background:rgba(108,228,210,0.08);border:1px solid rgba(108,228,210,0.18);border-radius:6px;padding:3px 8px;font-size:0.65rem;color:var(--teal);">Android</span>
-            <span style="background:rgba(108,228,210,0.08);border:1px solid rgba(108,228,210,0.18);border-radius:6px;padding:3px 8px;font-size:0.65rem;color:var(--teal);">Chrome</span>
-            <span style="background:rgba(108,228,210,0.08);border:1px solid rgba(108,228,210,0.18);border-radius:6px;padding:3px 8px;font-size:0.65rem;color:var(--teal);">Saved card</span>
-          </div>
-          <button onclick="openInternationalPayment()" style="background:#202124;color:#fff;border:none;padding:14px 24px;border-radius:100px;cursor:pointer;font-weight:600;font-size:0.85rem;font-family:'Outfit',sans-serif;width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform 0.15s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12.5 11.2v2.5h3.5c-.1.9-.8 1.6-1.7 1.9-.6.2-1.2.2-1.8 0-1.2-.4-2.1-1.5-2.1-2.8 0-1.3.9-2.4 2.1-2.8.7-.2 1.4-.2 2.1.1.5.2.9.5 1.3.9l1.5-1.5c-.6-.6-1.4-1.1-2.3-1.4-1.5-.4-3.1-.2-4.4.5-1.5.8-2.6 2.3-2.8 4-.2 1.7.4 3.4 1.7 4.5 1.2 1.1 2.9 1.6 4.6 1.3 1.5-.3 2.8-1.2 3.6-2.5.6-1 .9-2.2.8-3.4 0-.4 0-.8-.1-1.2h-6z" fill="#fff"/></svg>
-            Pay with G Pay
-          </button>
-          <div style="margin-top:12px;font-size:0.65rem;color:var(--muted);">Via Paystack · Tokenised · Secure</div>
-        </div>
-
-        <!-- 3. APPLE PAY -->
-        <div style="background:var(--input-bg);border:1px solid var(--border);border-radius:20px;padding:28px 24px;text-align:center;">
-          <div style="display:inline-flex;align-items:center;justify-content:center;width:54px;height:54px;border-radius:14px;background:rgba(255,255,255,0.05);margin-bottom:14px;">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" style="color:var(--text);"><path d="M17.05 12.04c-.03-3.07 2.51-4.55 2.62-4.62-1.43-2.09-3.66-2.38-4.45-2.41-1.89-.19-3.69 1.11-4.65 1.11-.97 0-2.45-1.09-4.03-1.06-2.07.03-3.99 1.21-5.06 3.06-2.16 3.74-.55 9.27 1.55 12.31 1.04 1.49 2.27 3.16 3.88 3.1 1.55-.06 2.14-1 4.02-1 1.87 0 2.4 1 4.04.97 1.67-.03 2.72-1.51 3.74-3.01 1.18-1.73 1.66-3.41 1.69-3.5-.04-.02-3.24-1.24-3.27-4.95zM14.13 3.06C14.96 2.04 15.53 0.61 15.37-0.84c-1.23.05-2.72.83-3.59 1.85-.78.92-1.46 2.39-1.27 3.79 1.39.11 2.78-.7 3.62-1.74z"/></svg>
-          </div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--text);letter-spacing:0.04em;margin-bottom:4px;">3. Apple Pay</div>
-          <div style="font-size:0.78rem;color:var(--muted);margin-bottom:14px;">Touch ID · Face ID checkout</div>
-          <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:18px;flex-wrap:wrap;">
-            <span style="background:rgba(108,228,210,0.08);border:1px solid rgba(108,228,210,0.18);border-radius:6px;padding:3px 8px;font-size:0.65rem;color:var(--teal);">iPhone</span>
-            <span style="background:rgba(108,228,210,0.08);border:1px solid rgba(108,228,210,0.18);border-radius:6px;padding:3px 8px;font-size:0.65rem;color:var(--teal);">iPad</span>
-            <span style="background:rgba(108,228,210,0.08);border:1px solid rgba(108,228,210,0.18);border-radius:6px;padding:3px 8px;font-size:0.65rem;color:var(--teal);">Safari</span>
-          </div>
-          <button onclick="openInternationalPayment()" style="background:#000;color:#fff;border:none;padding:14px 24px;border-radius:100px;cursor:pointer;font-weight:600;font-size:0.85rem;font-family:'Outfit',sans-serif;width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform 0.15s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 12.04c-.03-3.07 2.51-4.55 2.62-4.62-1.43-2.09-3.66-2.38-4.45-2.41-1.89-.19-3.69 1.11-4.65 1.11-.97 0-2.45-1.09-4.03-1.06-2.07.03-3.99 1.21-5.06 3.06-2.16 3.74-.55 9.27 1.55 12.31 1.04 1.49 2.27 3.16 3.88 3.1 1.55-.06 2.14-1 4.02-1 1.87 0 2.4 1 4.04.97 1.67-.03 2.72-1.51 3.74-3.01 1.18-1.73 1.66-3.41 1.69-3.5-.04-.02-3.24-1.24-3.27-4.95z"/></svg>
-            Pay
-          </button>
-          <div style="margin-top:12px;font-size:0.65rem;color:var(--muted);">Via Paystack · Biometric · Encrypted</div>
         </div>
 
       </div>
@@ -392,7 +378,7 @@
           <button type="button" id="rg-toggle-local" onclick="setRegType('local')" style="flex:1;min-width:200px;background:var(--card);border:2px solid var(--teal);color:var(--text);padding:18px 20px;border-radius:14px;cursor:pointer;font-family:'Outfit',sans-serif;text-align:left;transition:all 0.2s;">
             <div style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;color:var(--teal);text-transform:uppercase;margin-bottom:4px;">🇬🇭 Local Player</div>
             <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.04em;">Resident in Ghana</div>
-            <div style="font-size:0.78rem;color:var(--muted);margin-top:4px;">GHS 400/day · paid in Cedis</div>
+            <div style="font-size:0.78rem;color:var(--muted);margin-top:4px;">GHS 700/day · paid in Cedis</div>
           </button>
           <button type="button" id="rg-toggle-overseas" onclick="setRegType('overseas')" style="flex:1;min-width:200px;background:var(--card);border:2px solid var(--border);color:var(--text);padding:18px 20px;border-radius:14px;cursor:pointer;font-family:'Outfit',sans-serif;text-align:left;transition:all 0.2s;">
             <div style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;color:var(--orange);text-transform:uppercase;margin-bottom:4px;">✈️ Overseas Player</div>
