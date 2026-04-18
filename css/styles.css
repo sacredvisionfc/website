@@ -3200,13 +3200,28 @@
         line-height: 1.1;
       }
 
-      /* --- Coaches grid: center 2 cards nicely on desktop --- */
+      /* --- Coaches grid: auto-fit with centering so 2, 3, or 4 cards all balance --- */
       .coaches-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        max-width: 840px;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        max-width: 1160px;
         margin-left: auto;
         margin-right: auto;
         gap: 24px;
+      }
+      /* Placeholder photo panel for coaches without a headshot */
+      .coach-photo--placeholder {
+        background: linear-gradient(135deg, rgba(0,168,200,0.12), rgba(212,120,58,0.12));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid var(--border);
+      }
+      .coach-initials {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 4.5rem;
+        letter-spacing: 0.05em;
+        color: var(--teal);
+        opacity: 0.55;
       }
       .coach-card {
         display: flex;
