@@ -61,7 +61,7 @@ function openPaystackPayment() {
       var payType = document.getElementById("ps-paytype").value;
       var amount = calcPayment(700, weeks, payType);
       var payLabel = payType === "deposit" ? "50% Deposit" : payType === "balance" ? "Balance" : "Full Payment";
-      var desc = "Local Rate \u2014 " + weeks + (weeks === 1 ? " week" : " weeks") + " \u2014 " + payLabel;
+      var desc = "Local Rate, " + weeks + (weeks === 1 ? " week" : " weeks") + ", " + payLabel;
       return { amount: amount, description: desc };
     }
   }).then(function(result) {
@@ -162,13 +162,13 @@ function payWithPaystack(amount, currency, description) {
   });
 }
 
-// ── INTERNATIONAL PAYMENTS — LIVE EXCHANGE RATES ──────
+// ── INTERNATIONAL PAYMENTS, LIVE EXCHANGE RATES ──────
 // Fallback rates if API fails
 var FX_TO_GHS = { USD: 11.1, GBP: 14.6, EUR: 12.8 };
 var fxLastUpdated = "";
 
 function fetchLiveRates() {
-  // ExchangeRate-API — free tier, no API key needed for open endpoint
+  // ExchangeRate-API, free tier, no API key needed for open endpoint
   fetch("https://open.er-api.com/v6/latest/USD")
     .then(function(res) { return res.json(); })
     .then(function(data) {
@@ -249,7 +249,7 @@ function openInternationalPayment() {
         var ghsAmount = toGHS(amount, cur);
         document.getElementById("intl-daily").textContent = sym + "85/day";
         var label = payType === "deposit" ? "50% deposit" : payType === "balance" ? "Balance (50%)" : "Full payment";
-        document.getElementById("intl-info").textContent = label + " \u2014 " + sym + amount.toLocaleString() + " " + cur;
+        document.getElementById("intl-info").textContent = label + ", " + sym + amount.toLocaleString() + " " + cur;
         document.getElementById("intl-ghs").textContent = "Charged as GHS " + ghsAmount.toLocaleString() + " (1 " + cur + " \u2248 " + FX_TO_GHS[cur] + " GHS)";
         document.getElementById("intl-updated").textContent = fxLastUpdated ? "Live rate \u00b7 Updated " + fxLastUpdated : "Fallback rate \u00b7 Refreshing\u2026";
       }
@@ -268,7 +268,7 @@ function openInternationalPayment() {
       var amount = calcPayment(85, weeks, payType);
       var ghsAmount = toGHS(amount, currency);
       var payLabel = payType === "deposit" ? "50% Deposit" : payType === "balance" ? "Balance" : "Full Payment";
-      var desc = "International Rate \u2014 " + weeks + (weeks === 1 ? " week" : " weeks") + " \u2014 " + payLabel + " (" + fxSymbol(currency) + amount + " " + currency + ")";
+      var desc = "International Rate, " + weeks + (weeks === 1 ? " week" : " weeks") + ", " + payLabel + " (" + fxSymbol(currency) + amount + " " + currency + ")";
       return { ghsAmount: ghsAmount, originalAmount: amount, currency: currency, description: desc };
     }
   }).then(function(result) {
@@ -323,7 +323,7 @@ if (registerModal) {
 
     var formData = new FormData();
     formData.append("access_key", "34b15cce-97e2-47df-8ad6-cc13822b374f");
-    formData.append("subject", "Camp Registration \u2014 " + fname + " " + lname);
+    formData.append("subject", "Camp Registration, " + fname + " " + lname);
     formData.append("from_name", "SVFA Website");
     formData.append("First Name", fname);
     formData.append("Last Name", lname);
@@ -371,4 +371,4 @@ if (registerModal) {
   }
 }
 
-// Inline form was removed — all Register CTAs now open the single modal form (#registerModal).
+// Inline form was removed, all Register CTAs now open the single modal form (#registerModal).
