@@ -27,7 +27,7 @@
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/styles.min.css?v=1.8" />
+    <link rel="stylesheet" href="css/styles.min.css?v=1.9" />
     <!-- Google Analytics, deferred until cookie consent -->
     <script>
       (function(){
@@ -76,8 +76,12 @@
 
     <main id="main-content">
     <!-- PRICING -->
-    <div class="urgency-banner">
-      Summer 2026, Registration Open
+    <div class="urgency-banner promo-banner" id="promoBanner">
+      <strong class="promo-badge">FLASH DEAL, 50% OFF</strong>
+      <span class="promo-sep">·</span>
+      <span>Summer 2026 registration</span>
+      <span class="promo-sep">·</span>
+      <span>Ends in <span id="promoCountdown">35d 00h 00m 00s</span></span>
     </div>
     <section class="sec" id="pricing">
       <p class="tag reveal">Pricing</p>
@@ -168,7 +172,8 @@
           <div class="price-title">Day Programme</div>
           <div class="price-who">Training-only · no overnight stay</div>
           <div class="price-rate-label">Daily Rate</div>
-          <div class="price-rate">GHS 300</div>
+          <div class="price-rate-was">Was <s>GHS 600</s></div>
+          <div class="price-rate">GHS 300<span class="price-rate-off">, 50% OFF</span></div>
           <div class="price-per">
             per day · training sessions only
           </div>
@@ -193,7 +198,8 @@
           <div class="price-title">Local Rate</div>
           <div class="price-who">Players resident in Ghana</div>
           <div class="price-rate-label">Daily Rate</div>
-          <div class="price-rate">GHS 700</div>
+          <div class="price-rate-was">Was <s>GHS 1,400</s></div>
+          <div class="price-rate">GHS 700<span class="price-rate-off">, 50% OFF</span></div>
           <div class="price-per">
             per day · minimum 7 days · book in weekly blocks
           </div>
@@ -219,7 +225,8 @@
           <div class="price-title">Overseas Rate</div>
           <div class="price-who">Players residing abroad (USA · UK · EU · diaspora)</div>
           <div class="price-rate-label">Daily Rate</div>
-          <div class="price-rate">$85</div>
+          <div class="price-rate-was">Was <s>$170</s></div>
+          <div class="price-rate">$85<span class="price-rate-off">, 50% OFF</span></div>
           <div class="price-per">
             per day · minimum 7 days · book in weekly blocks
           </div>
@@ -777,6 +784,51 @@
     <!-- Secure checkout handles both local and international payments -->
     <script src="js/payment.js?v=13" defer></script>
     <script src="js/shared.js"></script>
+
+    <!-- PROMO COUNTDOWN: looping 35 → 15 → 25 → 35 days -->
+    <script>
+    (function(){
+      var target = document.getElementById('promoCountdown');
+      if (!target) return;
+      var CYCLE = [35, 15, 25]; // days, in order
+      var KEY_PHASE = 'svfa-promo-phase';
+      var KEY_END   = 'svfa-promo-end';
+      var phase = parseInt(localStorage.getItem(KEY_PHASE) || '0', 10);
+      if (phase < 0 || phase >= CYCLE.length) phase = 0;
+      var end = parseInt(localStorage.getItem(KEY_END) || '0', 10);
+      var now = Date.now();
+      if (!end || isNaN(end) || end <= now) {
+        // First visit OR previous phase expired: start/advance the cycle
+        if (end && !isNaN(end) && end <= now) {
+          phase = (phase + 1) % CYCLE.length;
+        }
+        end = now + CYCLE[phase] * 24 * 60 * 60 * 1000;
+        localStorage.setItem(KEY_PHASE, String(phase));
+        localStorage.setItem(KEY_END, String(end));
+      }
+      function tick(){
+        var ms = end - Date.now();
+        if (ms <= 0) {
+          // Advance to next phase
+          phase = (phase + 1) % CYCLE.length;
+          end = Date.now() + CYCLE[phase] * 24 * 60 * 60 * 1000;
+          localStorage.setItem(KEY_PHASE, String(phase));
+          localStorage.setItem(KEY_END, String(end));
+          ms = end - Date.now();
+        }
+        var d = Math.floor(ms / 86400000);
+        var h = Math.floor((ms % 86400000) / 3600000);
+        var m = Math.floor((ms % 3600000) / 60000);
+        var s = Math.floor((ms % 60000) / 1000);
+        target.textContent = d + 'd ' +
+          (h < 10 ? '0' + h : h) + 'h ' +
+          (m < 10 ? '0' + m : m) + 'm ' +
+          (s < 10 ? '0' + s : s) + 's';
+      }
+      tick();
+      setInterval(tick, 1000);
+    })();
+    </script>
     <!-- STRUCTURED DATA / SCHEMA MARKUP -->
     <script type="application/ld+json">
       {
