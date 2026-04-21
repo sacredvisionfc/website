@@ -697,6 +697,15 @@
           flex: 1 1 100%;
         }
       }
+      /* Graceful fallback when a tourist-card image is missing */
+      .tourist-card--noimage::before {
+        content: "";
+        display: block;
+        aspect-ratio: 3/2;
+        background:
+          linear-gradient(135deg, rgba(0,168,200,0.18), rgba(212,120,58,0.14)),
+          radial-gradient(circle at 50% 45%, rgba(108,228,210,0.22), transparent 60%);
+      }
       .tourist-card {
         border-radius: 16px;
         overflow: hidden;
