@@ -335,7 +335,10 @@ if (registerModal) {
     formData.append("Number of Weeks", document.getElementById("reg-programme").value);
     formData.append("Preferred Start Date", document.getElementById("reg-start").value);
     formData.append("Rate Type", document.getElementById("reg-rate").value);
-    formData.append("Parent/Guardian", document.getElementById("reg-parent").value.trim());
+    formData.append("Parent/Guardian Name", document.getElementById("reg-parent-name").value.trim());
+    formData.append("Parent/Guardian Relationship", document.getElementById("reg-parent-rel").value);
+    formData.append("Parent/Guardian Phone", document.getElementById("reg-parent-phone").value.trim());
+    formData.append("Parent/Guardian Email", document.getElementById("reg-parent-email").value.trim());
     formData.append("Medical Info", document.getElementById("reg-medical").value.trim());
     formData.append("Additional Info", document.getElementById("reg-extra").value.trim());
 

@@ -3137,6 +3137,32 @@
         .sec-bg { padding: 56px 0; }
       }
 
+      /* Registration fieldset (Parent / Guardian / Emergency) */
+      .vf-fieldset {
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 16px 18px 6px;
+        margin: 4px 0 18px;
+        background: rgba(108, 228, 210, 0.03);
+      }
+      .vf-legend {
+        font-family: "Space Mono", monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--teal);
+        padding: 0 8px;
+      }
+      .vf-legend-note {
+        font-size: 0.78rem;
+        color: var(--muted);
+        line-height: 1.55;
+        margin: 0 0 12px;
+      }
+      .vf-fieldset .vf-row:last-of-type .vf-group:last-child {
+        margin-bottom: 12px;
+      }
+
       /* --- Modal responsive --- */
       @media (max-width: 640px) {
         .vacancy-form-box,

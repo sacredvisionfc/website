@@ -27,7 +27,7 @@
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/styles.min.css?v=2.1" />
+    <link rel="stylesheet" href="css/styles.min.css?v=2.2" />
     <!-- Google Analytics (deferred until cookie consent) -->
     <script>
       (function(){
@@ -486,20 +486,50 @@
             </select>
           </div>
 
-          <div class="vf-row">
-            <div class="vf-group">
-              <label for="reg-rate">Rate Type *</label>
-              <select id="reg-rate" name="Rate Type" required>
-                <option value="" disabled selected>Select rate…</option>
-                <option value="Local Rate (GHS)">Local Rate (GHS)</option>
-                <option value="International Rate (USD)">International Rate (USD)</option>
-              </select>
-            </div>
-            <div class="vf-group">
-              <label for="reg-parent">Parent/Guardian Name</label>
-              <input type="text" id="reg-parent" name="Parent Guardian Name" placeholder="If under 18">
-            </div>
+          <div class="vf-group">
+            <label for="reg-rate">Rate Type *</label>
+            <select id="reg-rate" name="Rate Type" required>
+              <option value="" disabled selected>Select rate…</option>
+              <option value="Local Rate (GHS)">Local Rate (GHS)</option>
+              <option value="International Rate (USD)">International Rate (USD)</option>
+            </select>
           </div>
+
+          <!-- Parent / Guardian / Emergency contact section -->
+          <fieldset class="vf-fieldset">
+            <legend class="vf-legend">Parent / Guardian / Emergency Contact</legend>
+            <p class="vf-legend-note">
+              Required for players under 18. Strongly recommended for all players, in case of emergency.
+            </p>
+            <div class="vf-row">
+              <div class="vf-group">
+                <label for="reg-parent-name">Full Name</label>
+                <input type="text" id="reg-parent-name" name="Parent/Guardian Name" placeholder="e.g. Akua Asante" autocomplete="name" />
+              </div>
+              <div class="vf-group">
+                <label for="reg-parent-rel">Relationship to Player</label>
+                <select id="reg-parent-rel" name="Parent/Guardian Relationship">
+                  <option value="" disabled selected>Select…</option>
+                  <option value="Mother">Mother</option>
+                  <option value="Father">Father</option>
+                  <option value="Legal Guardian">Legal Guardian</option>
+                  <option value="Sibling">Sibling</option>
+                  <option value="Spouse/Partner">Spouse / Partner</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="vf-row">
+              <div class="vf-group">
+                <label for="reg-parent-phone">Phone Number (WhatsApp preferred)</label>
+                <input type="tel" id="reg-parent-phone" name="Parent/Guardian Phone" placeholder="+233 24 000 0000" autocomplete="tel" inputmode="tel" />
+              </div>
+              <div class="vf-group">
+                <label for="reg-parent-email">Email Address</label>
+                <input type="email" id="reg-parent-email" name="Parent/Guardian Email" placeholder="parent@example.com" autocomplete="email" inputmode="email" />
+              </div>
+            </div>
+          </fieldset>
 
           <div class="vf-group">
             <label for="reg-medical">Medical Conditions / Allergies</label>
