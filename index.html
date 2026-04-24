@@ -123,7 +123,7 @@
           +233 24 701 2493
         </a>
         <button type="button" class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
-        <button type="button" class="theme-toggle" id="themeToggle" title="Toggle light/dark mode" aria-label="Toggle light/dark mode"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+        <button type="button" class="nav-search" id="searchBtn" aria-label="Search site" title="Search (Ctrl+K)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></button><button type="button" class="theme-toggle" id="themeToggle" title="Toggle light/dark mode" aria-label="Toggle light/dark mode"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
         <a href="pricing.html?register=1" class="nav-cta">Register Now</a>
       </div>
     </nav>
@@ -203,7 +203,7 @@
     </div>
 
     <!-- PARTNER LOGOS -->
-    <div class="logos-bar">
+    <div class="logos-bar" id="partners">
       <div class="logos-bar-label">Registered, Affiliated &amp; Partnered With</div>
       <div class="logos-carousel">
         <div class="logos-track">
@@ -683,7 +683,7 @@
     <div class="stripe"></div>
 
     <!-- TESTIMONIALS -->
-    <section class="sec">
+    <section class="sec" id="testimonials">
       <p class="tag reveal">What They Say</p>
       <h2 class="reveal reveal-d1">Hear From Our Players</h2>
       <p class="intro reveal reveal-d2">
@@ -919,7 +919,7 @@
     <div class="stripe"></div>
 
     <!-- PLAYER PATHWAY -->
-    <div class="sec-bg">
+    <div class="sec-bg" id="pathway">
       <div class="sec">
         <p class="tag reveal">Your Journey</p>
         <h2 class="reveal reveal-d1">The Player Pathway</h2>
@@ -1258,11 +1258,11 @@
           </div>
         </div>
         <!-- TRANSPORT ROUTE -->
-        <div class="reveal" style="margin-top:48px;">
+        <div class="reveal" id="travel" style="margin-top:48px;scroll-margin-top:80px;">
           <p class="tag" style="margin-bottom:8px;">Transport Route</p>
           <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.04em;color:var(--text);margin-bottom:8px;">Getting to Camp</h3>
           <p style="color:var(--text2);line-height:1.6;font-size:0.95rem;margin-bottom:20px;max-width:760px;">
-            <strong style="color:var(--orange);">Overseas players:</strong> fly into Kotoka International Airport (Accra). We pick you up on arrival and drive you straight to camp in Winneba (about 1h 30m). <strong style="color:var(--teal);">Local players:</strong> meeting point in Accra Mall, confirmed on registration.
+            <strong style="color:var(--orange);">Overseas players:</strong> fly into Accra International Airport (ACC). We pick you up on arrival and drive you straight to camp in Winneba (about 1h 30m). <strong style="color:var(--teal);">Local players:</strong> meeting point in Accra Mall, confirmed on registration.
           </p>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;align-items:stretch;">
             <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;">
@@ -1272,7 +1272,7 @@
                 </div>
                 <div>
                   <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.04em;color:var(--text);">Overseas Pickup</div>
-                  <div style="font-size:0.78rem;color:var(--muted);">Kotoka Airport (ACC) → Winneba</div>
+                  <div style="font-size:0.78rem;color:var(--muted);">Accra International Airport (ACC) → Winneba</div>
                 </div>
               </div>
               <ul style="list-style:none;padding:0;margin:0;font-size:0.85rem;color:var(--text2);line-height:1.8;">
@@ -1307,7 +1307,7 @@
               allowfullscreen=""
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
-              title="Transport route from Kotoka Airport (Accra) to Perez University, Winneba"
+              title="Transport route from Accra International Airport (ACC) to Perez University, Winneba"
             ></iframe>
           </div>
         </div>
