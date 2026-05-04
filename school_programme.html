@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #F47B20;
+    --teal: #00AEBD;
+    --dark: #0D1117;
+    --mid: #1A2230;
+    --card: #1E2A3A;
+    --white: #FFFFFF;
+    --light-gray: #C8D6E5;
+    --accent-orange: rgba(244,123,32,0.15);
+    --accent-teal: rgba(0,174,189,0.12);
+  }
+
+  body {
+    background: var(--dark);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* === BACKGROUND === */
+  .bg-field {
+    position: fixed; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(0,174,189,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, rgba(244,123,32,0.08) 0%, transparent 60%),
+      var(--dark);
+  }
+  .bg-lines {
+    position: fixed; inset: 0; z-index: 0; opacity: 0.04;
+    background-image:
+      repeating-linear-gradient(90deg, #fff 0px, #fff 1px, transparent 1px, transparent 60px),
+      repeating-linear-gradient(0deg, #fff 0px, #fff 1px, transparent 1px, transparent 60px);
+  }
+
+  /* === WRAPPER === */
+  .page {
+    position: relative; z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* === HEADER === */
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 2px solid var(--orange);
+    position: relative;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 120px; height: 4px;
+    background: var(--teal);
+  }
+
+  .logo-wrap {
+    flex-shrink: 0;
+    width: 130px; height: 130px;
+    background: radial-gradient(circle, rgba(244,123,32,0.1), transparent 70%);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid rgba(244,123,32,0.3);
+    box-shadow: 0 0 40px rgba(244,123,32,0.2);
+  }
+  .logo-wrap img {
+    width: 110px; height: 110px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+  }
+
+  .header-text { flex: 1; }
+  .club-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .club-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 60px);
+    line-height: 1;
+    color: var(--white);
+    letter-spacing: 2px;
+  }
+  .club-name span { color: var(--orange); }
+  .tagline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: var(--light-gray);
+    margin-top: 8px;
+    text-transform: uppercase;
+  }
+  .season-badge {
+    background: var(--orange);
+    color: var(--white);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    padding: 6px 18px;
+    border-radius: 4px;
+    margin-top: 12px;
+    display: inline-block;
+  }
+
+  /* === SECTION TITLE === */
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 3px;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--orange), transparent);
+  }
+
+  /* === OVERVIEW GRID === */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-top: 3px solid var(--orange);
+    border-radius: 8px;
+    padding: 20px 16px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent-orange);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .stat-card:hover::before { opacity: 1; }
+  .stat-card.teal { border-top-color: var(--teal); }
+  .stat-card.teal::before { background: var(--accent-teal); }
+  .stat-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--orange);
+    line-height: 1;
+  }
+  .stat-card.teal .stat-value { color: var(--teal); }
+  .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--light-gray);
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* === PROGRAM COMPARISON === */
+  .programs-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 640px) { .programs-wrap { grid-template-columns: 1fr; } }
+
+  .prog-card {
+    background: var(--card);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.07);
+    overflow: hidden;
+  }
+  .prog-header {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .prog-header.orange { background: linear-gradient(135deg, var(--orange), #d4650f); }
+  .prog-header.teal { background: linear-gradient(135deg, var(--teal), #0090a0); }
+  .prog-icon {
+    width: 42px; height: 42px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .prog-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+  .prog-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    opacity: 0.85;
+    text-transform: uppercase;
+  }
+  .prog-body { padding: 20px 24px; }
+  .prog-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 13px;
+  }
+  .prog-row:last-child { border-bottom: none; }
+  .prog-key {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--light-gray);
+  }
+  .prog-val {
+    font-weight: 600;
+    color: var(--white);
+    text-align: right;
+    max-width: 55%;
+    font-size: 12.5px;
+    line-height: 1.4;
+  }
+
+  /* === PHASE TABLE === */
+  .phase-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-bottom: 48px;
+  }
+  .phase-table thead th {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--light-gray);
+    padding: 0 20px 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .phase-table thead th:first-child { width: 160px; }
+  .phase-row td {
+    background: var(--card);
+    padding: 18px 20px;
+    font-size: 12.5px;
+    line-height: 1.6;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-left: none; border-right: none;
+  }
+  .phase-row td:first-child {
+    border-left: 4px solid var(--orange);
+    border-radius: 8px 0 0 8px;
+    border-right: none;
+  }
+  .phase-row:nth-child(even) td:first-child { border-left-color: var(--teal); }
+  .phase-row td:last-child {
+    border-radius: 0 8px 8px 0;
+    border-left: none;
+  }
+  .phase-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: var(--orange);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .phase-row:nth-child(even) .phase-label { color: var(--teal); }
+  .phase-weeks {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--light-gray);
+    text-transform: uppercase;
+  }
+  .phase-focus {
+    display: inline-block;
+    background: rgba(244,123,32,0.18);
+    color: var(--orange);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-top: 6px;
+  }
+  .phase-row:nth-child(even) .phase-focus {
+    background: rgba(0,174,189,0.18);
+    color: var(--teal);
+  }
+  .bullet-list { list-style: none; padding: 0; }
+  .bullet-list li {
+    padding: 2px 0;
+    color: var(--light-gray);
+    font-size: 12px;
+  }
+  .bullet-list li::before {
+    content: '▸ ';
+    color: var(--orange);
+    font-size: 10px;
+  }
+  td:nth-child(3) .bullet-list li::before { color: var(--teal); }
+
+  /* === TRAINING COMPONENTS === */
+  .components-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .comp-card {
+    background: var(--card);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.06);
+    overflow: hidden;
+  }
+  .comp-header {
+    padding: 12px 18px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 17px;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .comp-header.orange { color: var(--orange); border-bottom: 2px solid var(--orange); }
+  .comp-header.teal { color: var(--teal); border-bottom: 2px solid var(--teal); }
+  .comp-body { padding: 14px 18px; }
+  .comp-row {
+    margin-bottom: 10px;
+  }
+  .comp-cat {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--light-gray);
+    margin-bottom: 3px;
+  }
+  .comp-val {
+    font-size: 12.5px;
+    color: var(--white);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* === WEEKLY STRUCTURE === */
+  .weekly-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+  .day-card {
+    background: var(--card);
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 16px 14px;
+    text-align: center;
+  }
+  .day-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--light-gray);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .day-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--orange);
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+  .day-card:nth-child(2) .day-name { color: var(--teal); }
+  .day-card:nth-child(3) .day-name { color: #e8c84a; }
+  .day-card:nth-child(4) .day-name { color: #a78bfa; }
+  .day-card:nth-child(5) .day-name { color: #34d399; }
+  .day-focus {
+    font-size: 11px;
+    color: var(--light-gray);
+    line-height: 1.5;
+  }
+  .optional-tag {
+    display: inline-block;
+    background: rgba(167,139,250,0.15);
+    color: #a78bfa;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-bottom: 6px;
+  }
+
+  /* === FOOTER === */
+  .footer {
+    text-align: center;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--light-gray);
+    opacity: 0.5;
+    text-transform: uppercase;
+  }
+  .footer-tagline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--orange);
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="bg-field"></div>
+<div class="bg-lines"></div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo-wrap">
+      <img src="/mnt/user-data/uploads/1777907492663_image.png" alt="Sacred Vision FC Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='⚽';" />
+    </div>
+    <div class="header-text">
+      <div class="club-label">Official Training Document · 2022</div>
+      <div class="club-name">Sacred Vision <span>Football</span> Academy</div>
+      <div class="tagline">Ogyabirifa: Together We Play</div>
+      <div class="season-badge">Termly Training Framework</div>
+    </div>
+  </div>
+
+  <!-- OVERVIEW STATS -->
+  <div class="section-title">Program Overview</div>
+  <div class="overview-grid">
+    <div class="stat-card">
+      <div class="stat-value">9</div>
+      <div class="stat-label">Weeks (Core)</div>
+    </div>
+    <div class="stat-card teal">
+      <div class="stat-value">16</div>
+      <div class="stat-label">Weeks (Full)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">2+</div>
+      <div class="stat-label">Sessions / Week</div>
+    </div>
+    <div class="stat-card teal">
+      <div class="stat-value">75</div>
+      <div class="stat-label">Min / Session (U14)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">120</div>
+      <div class="stat-label">Min / Session (14+)</div>
+    </div>
+    <div class="stat-card teal">
+      <div class="stat-value">2</div>
+      <div class="stat-label">Age Groups</div>
+    </div>
+  </div>
+
+  <!-- PROGRAM COMPARISON -->
+  <div class="section-title">Program Profiles</div>
+  <div class="programs-wrap">
+    <div class="prog-card">
+      <div class="prog-header orange">
+        <div class="prog-icon">🌱</div>
+        <div>
+          <div class="prog-title">U14 Program</div>
+          <div class="prog-sub">Foundation & Development</div>
+        </div>
+      </div>
+      <div class="prog-body">
+        <div class="prog-row"><span class="prog-key">Session Length</span><span class="prog-val">75–90 minutes</span></div>
+        <div class="prog-row"><span class="prog-key">Sessions/Week</span><span class="prog-val">2 + Optional + Match</span></div>
+        <div class="prog-row"><span class="prog-key">Technical Focus</span><span class="prog-val">Ball mastery, dribbling, passing</span></div>
+        <div class="prog-row"><span class="prog-key">Tactical Focus</span><span class="prog-val">Basic positioning & awareness</span></div>
+        <div class="prog-row"><span class="prog-key">Physical Focus</span><span class="prog-val">Coordination & basic fitness</span></div>
+        <div class="prog-row"><span class="prog-key">Mental Focus</span><span class="prog-val">Confidence & enjoyment</span></div>
+        <div class="prog-row"><span class="prog-key">Game Format</span><span class="prog-val">Small-sided (4v4, 5v5, 7v7)</span></div>
+      </div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-header teal">
+        <div class="prog-icon">⚡</div>
+        <div>
+          <div class="prog-title">14+ Program</div>
+          <div class="prog-sub">Performance & Elite Development</div>
+        </div>
+      </div>
+      <div class="prog-body">
+        <div class="prog-row"><span class="prog-key">Session Length</span><span class="prog-val">90–120 minutes</span></div>
+        <div class="prog-row"><span class="prog-key">Sessions/Week</span><span class="prog-val">2 + Optional + Match</span></div>
+        <div class="prog-row"><span class="prog-key">Technical Focus</span><span class="prog-val">High-speed execution under pressure</span></div>
+        <div class="prog-row"><span class="prog-key">Tactical Focus</span><span class="prog-val">Advanced systems & team structure</span></div>
+        <div class="prog-row"><span class="prog-key">Physical Focus</span><span class="prog-val">Structured conditioning & endurance</span></div>
+        <div class="prog-row"><span class="prog-key">Mental Focus</span><span class="prog-val">Focus, discipline & decision-making</span></div>
+        <div class="prog-row"><span class="prog-key">Game Format</span><span class="prog-val">Full match scenarios (11v11)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEKLY STRUCTURE -->
+  <div class="section-title">Weekly Session Structure</div>
+  <div class="weekly-grid">
+    <div class="day-card">
+      <div class="day-num">Day 1</div>
+      <div class="day-name">Technical</div>
+      <div class="day-focus">Technical Training + Possession</div>
+    </div>
+    <div class="day-card">
+      <div class="day-num">Day 2</div>
+      <div class="day-name">Physical</div>
+      <div class="day-focus">Physical Conditioning + Tactical</div>
+    </div>
+    <div class="day-card">
+      <div class="day-num">Day 3</div>
+      <div class="day-name">Game Day</div>
+      <div class="day-focus">Game-Based Training</div>
+    </div>
+    <div class="day-card">
+      <div class="day-num">Day 4</div>
+      <div class="optional-tag">Optional</div>
+      <div class="day-name">Finish</div>
+      <div class="day-focus">Finishing + Position-Specific</div>
+    </div>
+    <div class="day-card">
+      <div class="day-num">Day 5</div>
+      <div class="day-name">Match</div>
+      <div class="day-focus">Competitive Match</div>
+    </div>
+  </div>
+
+  <!-- PHASE TABLE -->
+  <div class="section-title">Training Phases</div>
+  <table class="phase-table">
+    <thead>
+      <tr>
+        <th>Phase</th>
+        <th>U14 — Foundation</th>
+        <th>14+ — Performance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="phase-row">
+        <td>
+          <span class="phase-label">Phase 1</span>
+          <span class="phase-weeks">Weeks 1–2</span>
+          <div class="phase-focus">Touches & Confidence</div>
+        </td>
+        <td>
+          <ul class="bullet-list">
+            <li>Ball mastery — dribbling, turns, 1v1</li>
+            <li>Passing — short passes & triangles</li>
+            <li>Fun coordination drills</li>
+            <li>Small-sided games (4v4, 5v5)</li>
+          </ul>
+        </td>
+        <td>
+          <ul class="bullet-list">
+            <li>High-tempo passing patterns</li>
+            <li>First touch under pressure</li>
+            <li>Aerobic fitness (ball-based)</li>
+            <li>High-intensity small-sided games</li>
+          </ul>
+        </td>
+      </tr>
+      <tr class="phase-row">
+        <td>
+          <span class="phase-label">Phase 2</span>
+          <span class="phase-weeks">Weeks 3–4</span>
+          <div class="phase-focus">Awareness & Movement</div>
+        </td>
+        <td>
+          <ul class="bullet-list">
+            <li>Rondos — 3v1, 4v2</li>
+            <li>Basic formations (2-3-1, 3-2-1)</li>
+            <li>Transition play</li>
+            <li>Conditioned games</li>
+          </ul>
+        </td>
+        <td>
+          <ul class="bullet-list">
+            <li>Formations — 4-3-3, 4-2-3-1</li>
+            <li>Build-up play, pressing & defense</li>
+            <li>Overloads (6v4), transition games</li>
+            <li>Tactical shadow play</li>
+          </ul>
+        </td>
+      </tr>
+      <tr class="phase-row">
+        <td>
+          <span class="phase-label">Phase 3</span>
+          <span class="phase-weeks">Weeks 5–9</span>
+          <div class="phase-focus">Confidence & Decisions</div>
+        </td>
+        <td>
+          <ul class="bullet-list">
+            <li>7v7 / 9v9 matches</li>
+            <li>Pressing basics</li>
+            <li>Quick transitions</li>
+            <li>Weekly feedback sessions</li>
+          </ul>
+        </td>
+        <td>
+          <ul class="bullet-list">
+            <li>11v11 tactical games</li>
+            <li>Set pieces — corners, free kicks</li>
+            <li>Match scenarios under pressure</li>
+            <li>Video & coach analysis</li>
+          </ul>
+        </td>
+      </tr>
+      <tr class="phase-row">
+        <td>
+          <span class="phase-label">Phase 4</span>
+          <span class="phase-weeks">Weeks 10–16</span>
+          <div class="phase-focus">Enjoyment & Exposure</div>
+        </td>
+        <td>
+          <ul class="bullet-list">
+            <li>Mini tournaments</li>
+            <li>Skill challenges</li>
+            <li>Light position introduction</li>
+          </ul>
+        </td>
+        <td>
+          <ul class="bullet-list">
+            <li>Competitive matches</li>
+            <li>Showcase games — scout attendance</li>
+            <li>Position-specific training</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">Sacred Vision Football Academy · Est. 2022</div>
+    <div class="footer-tagline">Ogyabirifa: Together We Play</div>
+  </div>
+
+</div>
+</body>
+</html>
