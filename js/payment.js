@@ -116,7 +116,7 @@ function payWithPaystack(amount, currency, description) {
       var email = result.value.email;
       var name = result.value.name;
       var handler = PaystackPop.setup({
-        key: "pk_test_e3e9b8f7ea32e096e2e0c47058096c6c6c6b7052",
+        key: "pk_live_3f4f6a81711fed83f340d6ebaeefb3364173d2f1",
         email: email,
         amount: amount * 100,
         currency: currency,
