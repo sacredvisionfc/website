@@ -250,7 +250,7 @@
         <p class="vf-sub">Sacred Vision Football Club</p>
         <form
           id="vacancyForm"
-          onsubmit="return false;"
+          onsubmit="return svfcVacancyToWA(event);"
         >
           <input type="hidden" name="Position Applied For" id="vf-position-hidden" value="">
 
@@ -836,5 +836,30 @@ function declineCookies(){
   window['ga-disable-G-C66WVX6787']=true;
 }
 </script>
+    <script>
+      /* SVFC: coach applications were being discarded. Route to WhatsApp
+         with every submitted field pre-written. */
+      function svfcVacancyToWA(e) {
+        e.preventDefault();
+        var form = document.getElementById("vacancyForm");
+        var L = ["Hi Sacred Vision - I'd like to apply for a coaching role.", ""];
+        var seen = {};
+        var els = form.querySelectorAll("input,select,textarea");
+        for (var i = 0; i < els.length; i++) {
+          var el = els[i];
+          if (!el.name || seen[el.name]) continue;
+          if (el.type === "checkbox" && !el.checked) continue;
+          var val = String(el.value || "").trim();
+          if (!val) continue;
+          seen[el.name] = 1;
+          L.push(el.name + ": " + val);
+        }
+        var url =
+          "https://wa.me/233540722819?text=" + encodeURIComponent(L.join("\n"));
+        var w = window.open(url, "_blank");
+        if (!w) window.location.href = url;
+        return false;
+      }
+    </script>
   </body>
 </html>
