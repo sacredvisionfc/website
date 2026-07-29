@@ -880,10 +880,7 @@
           <p class="vf-sub">Sacred Vision Football Academy, Winneba, Ghana</p>
           <form
             id="registerForm"
-            onsubmit="
-              event.preventDefault();
-              window.open('https://wa.me/233540722819', '_blank');
-            "
+            onsubmit="return svfcRegisterToWA(event);"
           >
             <div class="vf-row">
               <div class="vf-group">
@@ -1618,6 +1615,65 @@
         localStorage.setItem("cookie-consent", "declined");
         document.getElementById("cookie-banner").style.display = "none";
         window["ga-disable-G-C66WVX6787"] = true;
+      }
+    </script>
+    <script>
+      /* SVFC: send completed registration straight into WhatsApp as a
+         pre-written, fully-qualified enquiry. No data re-typing. */
+      function svfcRegisterToWA(e) {
+        e.preventDefault();
+        var v = function (id) {
+          var el = document.getElementById(id);
+          return el && el.value ? String(el.value).trim() : "";
+        };
+        var L = [];
+        var name = (v("reg-fname") + " " + v("reg-lname")).trim();
+        var rate = v("reg-rate");
+
+        L.push("Hi Sacred Vision - I'd like to register for Summer Camp 2026.");
+        L.push("");
+        L.push("*PLAYER*");
+        if (name) L.push("Name: " + name);
+        if (v("reg-dob")) L.push("Date of birth: " + v("reg-dob"));
+        if (v("reg-nationality")) L.push("Nationality: " + v("reg-nationality"));
+        if (v("reg-position")) L.push("Position: " + v("reg-position"));
+
+        L.push("");
+        L.push("*CAMP*");
+        if (v("reg-start")) L.push("Preferred start: " + v("reg-start"));
+        if (v("reg-programme")) L.push("Duration: " + v("reg-programme"));
+        if (rate) L.push("Rate enquiry: " + rate);
+
+        L.push("");
+        L.push("*CONTACT*");
+        if (v("reg-email")) L.push("Email: " + v("reg-email"));
+        if (v("reg-phone")) L.push("Phone: " + v("reg-phone"));
+        if (v("reg-parent-name")) {
+          L.push(
+            "Parent/guardian: " +
+              v("reg-parent-name") +
+              (v("reg-parent-rel") ? " (" + v("reg-parent-rel") + ")" : "")
+          );
+        }
+        if (v("reg-parent-phone")) L.push("Parent phone: " + v("reg-parent-phone"));
+        if (v("reg-parent-email")) L.push("Parent email: " + v("reg-parent-email"));
+
+        if (v("reg-medical")) {
+          L.push("");
+          L.push("*MEDICAL / DIETARY*");
+          L.push(v("reg-medical"));
+        }
+        if (v("reg-extra")) {
+          L.push("");
+          L.push("*NOTES*");
+          L.push(v("reg-extra"));
+        }
+
+        var url =
+          "https://wa.me/233540722819?text=" + encodeURIComponent(L.join("\n"));
+        var w = window.open(url, "_blank");
+        if (!w) window.location.href = url;
+        return false;
       }
     </script>
   </body>
