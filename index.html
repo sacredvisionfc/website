@@ -974,7 +974,7 @@
         <p class="email-bar-sub">
           Camp updates and registration info. No spam.
         </p>
-        <form class="email-bar-form" onsubmit="event.preventDefault(); window.open('https://wa.me/233540722819', '_blank');" id="emailForm">
+        <form class="email-bar-form" onsubmit="event.preventDefault();var e=this.querySelector('input[type=email]');var t=&quot;Hi Sacred Vision - please send me Summer Camp 2026 updates and registration info.&quot;+(e&amp;&amp;e.value?' My email: '+e.value:'');var u='https://wa.me/233540722819?text='+encodeURIComponent(t);var w=window.open(u,'_blank');if(!w)window.location.href=u;return false;" id="emailForm">
           <input
             type="email"
             class="reg-input"
